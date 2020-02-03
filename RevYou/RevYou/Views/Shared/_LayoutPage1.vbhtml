@@ -1,5 +1,7 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +11,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="@Url.Content("~/Content/Template/assets/images/favicon.png")">
+    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
     <link href="@Url.Content("~/Content/Template/assets/extra-libs/c3/c3.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/Template/assets/libs/chartist/dist/chartist.min.css")" rel="stylesheet">
@@ -21,27 +24,21 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <!--Styles.Render("~/Content/css")-->
-    @Scripts.Render("~/bundles/modernizr")
-
 </head>
+
 <body>
-    <!--TEMPLATE LAYOUT CONTENTS-->
-        <!-- ============================================================== -->
-        <!-- Preloader - style you can find in spinners.css -->
-        <!-- ============================================================== -->
-        <div class="preloader">
-            <div class="lds-ripple">
-                <div class="lds-pos"></div>
-                <div class="lds-pos"></div>
-            </div>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
         </div>
-        <!-- ============================================================== -->
-        <!-- Main wrapper - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
          data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <!-- ============================================================== -->
@@ -61,12 +58,18 @@
                         <!-- Logo icon -->
                         <a href="index.html">
                             <b class="logo-icon">
-                               
+                                <!-- Dark Logo icon -->
+                                <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+                                <img src="../assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
-                                REVYOU
+                                <!-- dark Logo text -->
+                                <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo text -->
+                                <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
                             </span>
                         </a>
                     </div>
@@ -227,7 +230,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <img src="@Url.Content("~/Content/Template/assets/images/users/profile-pic.jpg")" alt="user" class="rounded-circle"
+                                <img src="../assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                      width="40">
                                 <span class="ml-2 d-none d-lg-inline-block">
                                     <span>Hello,</span> <span class="text-dark">Jason Doe</span> <i data-feather="chevron-down"
@@ -290,7 +293,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item selected">
+                        <li class="sidebar-item">
                             <a class="sidebar-link sidebar-link" href="index.html"
                                aria-expanded="false">
                                 <i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span>
@@ -706,9 +709,7 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-            <!--BODY WOULD START HERE-->
-                @RenderBody()
-            <!--END OF BODY HERE-->
+               
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -727,32 +728,32 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    <!--END OF TEMPLATE LAYOUT CONTENTS-->
-
-    
-    <!--Scripts.Render("~/bundles/jquery")-->
-    <!--Scripts.Render("~/bundles/bootstrap")-->
-    @RenderSection("scripts", required:=False)
-
-    <!--DEFAULT SCRIPTS FROM THE TEMPLATE-->
-    <script src="@Url.Content("~/Content/Template/assets/libs/jquery/dist/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/popper.js/dist/umd/popper.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/bootstrap/dist/js/bootstrap.min.js")"></script>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- apps -->
     <!-- apps -->
-    <script src="@Url.Content("~/Content/Template/dist/js/app-style-switcher.js")"></script>
-    <script src="@Url.Content("~/Content/Template/dist/js/feather.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/dist/js/sidebarmenu.js")"></script>
+    <script src="../dist/js/app-style-switcher.js"></script>
+    <script src="../dist/js/feather.min.js"></script>
+    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="@Url.Content("~/Content/Template/dist/js/custom.min.js")"></script>
+    <script src="../dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/c3/d3.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/c3/c3.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/chartist/dist/chartist.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js")"></script>
-    <script src="@Url.Content("~/Content/Template/dist/js/pages/dashboards/dashboard1.min.js")"></script>
+    <script src="../assets/extra-libs/c3/d3.min.js"></script>
+    <script src="../assets/extra-libs/c3/c3.min.js"></script>
+    <script src="../assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="../assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="../assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../dist/js/pages/dashboards/dashboard1.min.js"></script>
 </body>
+
 </html>

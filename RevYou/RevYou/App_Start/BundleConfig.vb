@@ -22,6 +22,17 @@ Public Module BundleConfig
         bundles.Add(New StyleBundle("~/Content/css").Include(
                   "~/Content/bootstrap.css",
                   "~/Content/site.css"))
+
+        'Tried to bundle some admin mart index styles
+        bundles.Add(New StyleBundle("~/Template/defaultStyle").Include(
+                    "~/Content/Template/assets/extra-libs/c3/c3.min.css",
+                    "~/Content/Template/assets/libs/chartist/dist/chartist.min.css",
+                    "~/Content/Template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css",
+                    "~/Content/Template/dist/css/style.min.css"
+                    ))
+
+
+
     End Sub
 End Module
 
