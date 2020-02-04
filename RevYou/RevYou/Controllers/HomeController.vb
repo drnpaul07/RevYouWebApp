@@ -7,6 +7,7 @@ Public Class HomeController
     Function Index() As ActionResult
         'Should do identity checking and route to specific home page
         Return RedirectToAction("Dashboard")
+
     End Function
 
     Function Dashboard() As ActionResult
