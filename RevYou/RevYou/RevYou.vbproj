@@ -262,6 +262,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\RevYou\img\revyou-icon.png" />
+    <Content Include="Content\RevYou\img\revyou-title.png" />
     <Content Include="Content\Template\assets\extra-libs\c3\c3.min.css" />
     <Content Include="Content\Template\assets\extra-libs\c3\c3.min.js" />
     <Content Include="Content\Template\assets\extra-libs\c3\d3.min.js" />
@@ -893,8 +895,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.vbhtml" />
     <Content Include="Views\Shared\Lockout.vbhtml" />
     <Content Include="Views\Shared\_LoginPartial.vbhtml" />
-    <Content Include="Views\Shared\_LayoutPage1.vbhtml" />
-    <Content Include="Views\Shared\_Layout - Copy.vbhtml" />
+    <Content Include="Views\Shared\_Layout.vbhtml" />
+    <Content Include="Views\Home\Dashboard.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -923,7 +925,6 @@
     <Content Include="Views\Home\Contact.vbhtml" />
     <Content Include="Views\Home\Index.vbhtml" />
     <Content Include="Views\Shared\Error.vbhtml" />
-    <Content Include="Views\Shared\_Layout.vbhtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
