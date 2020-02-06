@@ -66,17 +66,17 @@
                         <a href="/Home/Dashboard">
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
-                                <img width ="50" height="50" src="@Url.Content("~/Content/Template/assets/images/logo-icon.png")" alt="homepage" class="dark-logo">
+                                <img width="50" height="50" src="@Url.Content("~/Content/Template/assets/images/logo-icon.png")" alt="homepage" class="dark-logo">
                                 <!-- Light Logo icon -->
-                                <img width ="50" height="50" src="@Url.Content("~/Content/Template/assets/images/logo-icon.png")" alt="homepage" class="light-logo">
+                                <img width="50" height="50" src="@Url.Content("~/Content/Template/assets/images/logo-icon.png")" alt="homepage" class="light-logo">
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img  width ="110" height="25" src="@Url.Content("~/Content/RevYou/img/revyou-title.png")" alt="homepage" class="dark-logo">
+                                <img width="110" height="25" src="@Url.Content("~/Content/RevYou/img/revyou-title.png")" alt="homepage" class="dark-logo">
                                 <!-- Light Logo text -->
-                                <img  width ="110" height="25"src="@Url.Content("~/Content/RevYou/img/revyou-title.png")" class="light-logo" alt="homepage">
+                                <img width="110" height="25" src="@Url.Content("~/Content/RevYou/img/revyou-title.png")" class="light-logo" alt="homepage">
                             </span>
                         </a>
                     </div>
@@ -212,11 +212,11 @@
                             @<li Class="nav-item dropdown">
                                 <a Class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src = "@Url.Content("~/Content/Template/assets/images/users/profile-pic.jpg")" alt="user" Class="rounded-circle"
+                                    <img src="@Url.Content("~/Content/Template/assets/images/users/profile-pic.jpg")" alt="user" Class="rounded-circle"
                                          width="40">
                                     <span Class="ml-2 d-none d-lg-inline-block">
                                         <span Class="text-dark">
-                                        @User.Identity.GetUserName()
+                                            @User.Identity.GetUserName()
                                         </span> <i data-feather="chevron-down" class="svg-icon"></i>
                                     </span>
                                 </a>
@@ -263,7 +263,7 @@
                             @<li>@Html.ActionLink("Register", "Register", "Account", routeValues:=Nothing, htmlAttributes:=New With {.id = "registerLink"})</li>
                             @<li>@Html.ActionLink("Log in", "Login", "Account", routeValues:=Nothing, htmlAttributes:=New With {.id = "loginLink"})</li>
                         End If
-                        
+
                     </ul>
                 </div>
             </nav>
@@ -363,7 +363,7 @@
                         </li>
 
                         <li Class="list-divider"></li>
-                       
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

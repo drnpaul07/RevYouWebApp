@@ -70,6 +70,8 @@ Public Class RegisterViewModel
     <Display(Name:="Confirm password")>
     <Compare("Password", ErrorMessage:="The password and confirmation password do not match.")>
     Public Property ConfirmPassword As String
+
+
 End Class
 
 Public Class ResetPasswordViewModel
