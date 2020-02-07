@@ -84,3 +84,5 @@ E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbproj.GenerateR
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.dll
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.pdb
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.InitialCreate.resources
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.init.resources

@@ -238,6 +238,15 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002061715060_InitialCreate.Designer.vb">
+      <DependentUpon>202002061715060_InitialCreate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002061715060_InitialCreate.vb" />
+    <Compile Include="Migrations\202002070605045_init.Designer.vb">
+      <DependentUpon>202002070605045_init.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002070605045_init.vb" />
+    <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Models\AccountViewModels.vb" />
     <Compile Include="Models\ContosoModels\Course.vb" />
     <Compile Include="Models\ContosoModels\Enrollment.vb" />
@@ -263,6 +272,12 @@
     <Compile Include="Startup.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\202002061715060_InitialCreate.resx">
+      <DependentUpon>202002061715060_InitialCreate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002070605045_init.resx">
+      <DependentUpon>202002070605045_init.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
