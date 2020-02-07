@@ -41,9 +41,8 @@ End Class
 
 Public Class LoginViewModel
     <Required>
-    <Display(Name:="Email")>
-    <EmailAddress>
-    Public Property Email As String
+    <Display(Name:="Username")>
+    Public Property Username As String
 
     <Required>
     <DataType(DataType.Password)>
@@ -55,6 +54,10 @@ Public Class LoginViewModel
 End Class
 
 Public Class RegisterViewModel
+    <Required>
+    <Display(Name:="Username")>
+    Public Property Username As String
+
     <Required>
     <EmailAddress>
     <Display(Name:="Email")>

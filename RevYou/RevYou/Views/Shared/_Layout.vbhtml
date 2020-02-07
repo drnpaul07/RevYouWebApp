@@ -2,430 +2,504 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Content("~/Content/Template/assets/images/favicon.png")">
-    <!-- Custom CSS -->
-    <link href="@Url.Content("~/Content/Template/assets/extra-libs/c3/c3.min.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/Template/assets/libs/chartist/dist/chartist.min.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/Template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css")" rel="stylesheet" />
-    <!-- Custom CSS -->
-    <link href="@Url.Content("~/Content/Template/dist/css/style.min.css")" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     @If Request.IsAuthenticated Then
         @<title>RevYou (Auth) | @ViewBag.Title</title>
     Else
         @<title>RevYou (Anon)  | @ViewBag.Title</title>
     End If
-    <!--Styles.Render("~/Content/css")-->
-    @Scripts.Render("~/bundles/modernizr")
+    <!-- Favicon-->
+    @*<link rel="icon" href="@Url.Content("~/Content/Template/favicon.ico")" type="image/x-icon">*@
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="@Url.Content("~/Content/Template/plugins/bootstrap/css/bootstrap.css")" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="@Url.Content("~/Content/Template/plugins/node-waves/waves.css")" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="@Url.Content("~/Content/Template/plugins/animate-css/animate.css")" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="@Url.Content("~/Content/Template/css/style.css")" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="@Url.Content("~/Content/Template/css/themes/all-themes.css")" rel="stylesheet" />
+    <style>
+        .sidebar .user-info{
+            background: url("@Url.Content("~/Content/RevYou/images/revyou-banner.png")") no-repeat no-repeat !important;
+        }
+        .theme-light-blue .navbar{
+           border-bottom: #0380bc 4px solid !important;
+        }
+    </style>
 </head>
-<body>
-    <!--TEMPLATE LAYOUT CONTENTS-->
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
+
+<body class="theme-light-blue">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin6">
-            <nav class="navbar top-navbar navbar-expand-md">
-                <div class="navbar-header" data-logobg="skin6">
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
-                        <i class="ti-menu ti-close"></i>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <div class="navbar-brand">
-                        <!-- Logo icon -->
-                        <a href="/Home/Dashboard">
-                            <b class="logo-icon">
-                                <!-- Dark Logo icon -->
-                                <img width="50" height="50" src="@Url.Content("~/Content/Template/assets/images/logo-icon.png")" alt="homepage" class="dark-logo">
-                                <!-- Light Logo icon -->
-                                <img width="50" height="50" src="@Url.Content("~/Content/Template/assets/images/logo-icon.png")" alt="homepage" class="light-logo">
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
-                            <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img width="110" height="25" src="@Url.Content("~/Content/RevYou/img/revyou-title.png")" alt="homepage" class="dark-logo">
-                                <!-- Light Logo text -->
-                                <img width="110" height="25" src="@Url.Content("~/Content/RevYou/img/revyou-title.png")" class="light-logo" alt="homepage">
-                            </span>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="/Home/Index">REVYOU</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
                         </a>
-                    </div>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Toggle which is visible on mobile only -->
-                    <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                       data-toggle="collapse" data-target="#navbarSupportedContent"
-                       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="ti-more"></i>
-                    </a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        <!-- Notification -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
-                               id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">
-                                <span><i data-feather="bell" class="svg-icon"></i></span>
-                                <span class="badge badge-primary notify-no rounded-circle">5</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
-                                <ul class="list-style-none">
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
                                     <li>
-                                        <div class="message-center notifications position-relative">
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                               class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <div class="btn btn-danger rounded-circle btn-circle">
-                                                    <i data-feather="airplay" class="text-white"></i>
-                                                </div>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Luanch Admin</h6>
-                                                    <span class="font-12 text-nowrap d-block text-muted">
-                                                        Just see
-                                                        the my new
-                                                        admin!
-                                                    </span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                               class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-success text-white rounded-circle btn-circle">
-                                                    <i data-feather="calendar" class="text-white"></i>
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Event today</h6>
-                                                    <span class="font-12 text-nowrap d-block text-muted text-truncate">
-                                                        Just
-                                                        a reminder that you have event
-                                                    </span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                               class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-info rounded-circle btn-circle">
-                                                    <i data-feather="settings" class="text-white"></i>
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Settings</h6>
-                                                    <span class="font-12 text-nowrap d-block text-muted text-truncate">
-                                                        You
-                                                        can customize this template
-                                                        as you want
-                                                    </span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                               class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-primary rounded-circle btn-circle">
-                                                    <i data-feather="box" class="text-white"></i>
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Pavan kumar</h6> <span class="font-12 text-nowrap d-block text-muted">
-                                                        Just
-                                                        see the my admin!
-                                                    </span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link pt-3 text-center text-dark" href="javascript:void(0);">
-                                            <strong>Check all notifications</strong>
-                                            <i class="fa fa-angle-right"></i>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
-                        </li>
-                        <!-- End Notification -->
-                        <!-- ============================================================== -->
-                        <!-- create new -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="settings" class="svg-icon"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
-                        @If Request.IsAuthenticated Then
-                            @<!-- ============================================================== -->
-                            @<!-- User profile And search -->
-                            @<!-- ============================================================== -->
-                            @<li Class="nav-item dropdown">
-                                <a Class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <img src="@Url.Content("~/Content/Template/assets/images/users/profile-pic.jpg")" alt="user" Class="rounded-circle"
-                                         width="40">
-                                    <span Class="ml-2 d-none d-lg-inline-block">
-                                        <span Class="text-dark">
-                                            @User.Identity.GetUserName()
-                                        </span> <i data-feather="chevron-down" class="svg-icon"></i>
-                                    </span>
-                                </a>
-                                <div Class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                    <a Class="dropdown-item" href="javascript:void(0)">
-                                        <i data-feather="user"
-                                           Class="svg-icon mr-2 ml-1"></i>
-                                        My Profile
-                                    </a>
-                                    <a Class="dropdown-item" href="javascript:void(0)">
-                                        <i data-feather="credit-card"
-                                           Class="svg-icon mr-2 ml-1"></i>
-                                        My Balance
-                                    </a>
-                                    <a Class="dropdown-item" href="javascript:void(0)">
-                                        <i data-feather="mail"
-                                           Class="svg-icon mr-2 ml-1"></i>
-                                        Inbox
-                                    </a>
-                                    <div Class="dropdown-divider"></div>
-                                    <a Class="dropdown-item" href="javascript:void(0)">
-                                        <i data-feather="settings"
-                                           Class="svg-icon mr-2 ml-1"></i>
-                                        Account Setting
-                                    </a>
-                                    <div Class="dropdown-divider"></div>
-
-                                    <!--LOGOUT FORM-->
-                                    @Using Html.BeginForm("LogOff", "Account", FormMethod.Post, New With {.id = "logoutForm"})
-                                        @Html.AntiForgeryToken()
-                                        @<a Class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
-                                            <i data-feather="power"
-                                               Class="svg-icon mr-2 ml-1"></i>
-                                            Logout
-                                        </a>
-                                    End Using
-                                    @*<div class="dropdown-divider"></div>*@
-                                </div>
                             </li>
-                            @<!-- ============================================================== -->
-                            @<!-- User profile And search -->
-                            @<!-- ============================================================== -->
-                        Else
-                            @<li>@Html.ActionLink("Register", "Register", "Account", routeValues:=Nothing, htmlAttributes:=New With {.id = "registerLink"})</li>
-                            @<li>@Html.ActionLink("Log in", "Login", "Account", routeValues:=Nothing, htmlAttributes:=New With {.id = "loginLink"})</li>
-                        End If
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count">9</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="@Url.Content("~/Content/Template/images/user.png")" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.GetUserName()</div>
+                    <div class="email">email@email.com</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="waves-effect waves-block">
+                                    <i class="material-icons">input</i>
+                                    Sign Out
+                                </a>
+                            </li>
+                            <!--LOG OUT FORM-->
+                            @Using Html.BeginForm("LogOff", "Account", FormMethod.Post, New With {.id = "logoutForm"})
+                                @Html.AntiForgeryToken()
+                            End Using
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li id ="dashboardNav" class="">
+                        <a href="/Home/Index">
+                            <i class="material-icons">home</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li id="revyouNav">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">domain</i>
+                            <span>RevYou</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="revyouNavAbout">
+                                <a href="/Home/About">About</a>
+                            </li>
+                            <li id="revyouNavContact">
+                                <a href="/Home/Contact">Contact</a>
+                            </li>
+                        </ul>
+                    </li>
 
+                    <li class="header">SUB NAVIGATION</li>
+                    <li id="communityNav">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">public</i>
+                            <span>Community</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="communityNavPost">
+                                <a href="/Home/About">Posted Reviewers</a>
+                            </li>
+                            <li id="communityNavDisc">
+                                <a href="/Home/Contact">Discussions</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="chatBotNav">
+                        <a href="../pages/helper-classes.html">
+                            <i class="material-icons">chat</i>
+                            <span>Chat Bot</span>
+                        </a>
+                    </li>
+
+                    @If User.IsInRole("USER") Then
+                    @<li class="header" style="text-transform:uppercase">@User.Identity.GetUserName's Navigation</li>
+                    @<li id="profileNav">
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">face</i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+
+                    @<li id="reviewersNav">
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">local_library</i>
+                            <span>Reviewers</span>
+                        </a>
+                    </li>
+                    @<li>
+                        <a href="javascript:document.getElementById('logoutForm').submit();">
+                            <i class="material-icons">input</i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                    End If
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2019- 2020 <a href="javascript:void(0);">REVYOU</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation"><a href="#skins" data-toggle="tab">OTHER</a></li>
+                <li class="active" role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade" id="skins">
+                    <ul class="demo-choose-skin">
                     </ul>
                 </div>
-            </nav>
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!--CHECKS FOR THE URI - HOME-->
-                        @Code
-                            Dim classString As String
-
-                            If HttpContext.Current.Request.Url.AbsolutePath = "/Home/Dashboard" Then
-                                classString = "sidebar-item selected"
-                            Else
-                                classString = "sidebar-item"
-                            End If
-                        End Code
-
-                        <li Class="list-divider"></li>
-                        @*<li Class="nav-small-cap"><span class="hide-menu">Default Navigation</span></li>*@
-                        <li Class="@classString">
-                            <a Class="sidebar-link sidebar-link" href="/Home/Dashboard"
-                               aria-expanded="false">
-                                <i data-feather="home" Class="feather-icon"></i><span Class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li Class="sidebar-item">
-                            <a Class="sidebar-link sidebar-link" href="app-chat.html"
-                               aria-expanded="false">
-                                <i data-feather="message-square" Class="feather-icon"></i><span Class="hide-menu">Chat Bot</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                               aria-expanded="false">
-                                <i data-feather="file-text" class="feather-icon"></i><span class="hide-menu">ASP.NET</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item">
-                                    <a href="/Home/Index" class="sidebar-link">
-                                        <span class="hide-menu">
-                                            Index
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="/Home/About" class="sidebar-link">
-                                        <span class="hide-menu">
-                                            About
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="/Home/Contact" class="sidebar-link">
-                                        <span class="hide-menu">
-                                            Contact
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li Class="list-divider"></li>
-
-                        <li Class="nav-small-cap"><span class="hide-menu">Community</span></li>
-
-                        <li Class="sidebar-item">
-                            <a Class="sidebar-link" href="ticket-list.html"
-                               aria-expanded="false">
-                                <i data-feather="tag" Class="feather-icon"></i><span Class="hide-menu">
-                                    Ticket List
-                                </span>
-                            </a>
-                        </li>
-                        <li Class="sidebar-item">
-                            <a Class="sidebar-link sidebar-link" href="app-chat.html"
-                               aria-expanded="false">
-                                <i data-feather="message-square" Class="feather-icon"></i><span Class="hide-menu">Chat</span>
-                            </a>
-                        </li>
-                        <li Class="sidebar-item">
-                            <a Class="sidebar-link sidebar-link" href="app-calendar.html"
-                               aria-expanded="false">
-                                <i data-feather="calendar" Class="feather-icon"></i><span Class="hide-menu">Calendar</span>
-                            </a>
-                        </li>
-
-                        <li Class="list-divider"></li>
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
+                <div role="tabpanel" class="tab-pane fade tab-pane fade in active in active" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div Class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div Class="container-fluid">
-                <!--BODY WOULD START HERE-->
-                @RenderBody()
-                <!--END OF BODY HERE-->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center text-muted">
-                All Rights Reserved by RevYou
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!--END OF TEMPLATE LAYOUT CONTENTS-->
-    <!--Scripts.Render("~/bundles/jquery")-->
-    <!--Scripts.Render("~/bundles/bootstrap")-->
-    @RenderSection("scripts", required:=False)
+        <!-- #END# Right Sidebar -->
+    </section>
 
-    <!--DEFAULT SCRIPTS FROM THE TEMPLATE-->
-    <script src="@Url.Content("~/Content/Template/assets/libs/jquery/dist/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/popper.js/dist/umd/popper.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/bootstrap/dist/js/bootstrap.min.js")"></script>
-    <!-- apps -->
-    <!-- apps -->
-    <script src="@Url.Content("~/Content/Template/dist/js/app-style-switcher.js")"></script>
-    <script src="@Url.Content("~/Content/Template/dist/js/feather.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/dist/js/sidebarmenu.js")"></script>
-    <!--Custom JavaScript -->
-    <script src="@Url.Content("~/Content/Template/dist/js/custom.min.js")"></script>
-    <!--This page JavaScript -->
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/c3/d3.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/c3/c3.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/chartist/dist/chartist.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js")"></script>
-    <script src="@Url.Content("~/Content/Template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js")"></script>
-    <script src="@Url.Content("~/Content/Template/dist/js/pages/dashboards/dashboard1.min.js")"></script>
+    <section class="content">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+
+    @RenderSection("scripts", required:=False)
+    <!-- Jquery Core Js -->
+    <script src="@Url.Content("~/Content/Template/plugins/jquery/jquery.min.js")"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="@Url.Content("~/Content/Template/plugins/bootstrap/js/bootstrap.js")"></script>
+    <!-- Select Plugin Js -->
+    <script src="@Url.Content("~/Content/Template/plugins/bootstrap-select/js/bootstrap-select.js")"></script>
+    <!-- Slimscroll Plugin Js -->
+    <script src="@Url.Content("~/Content/Template/plugins/jquery-slimscroll/jquery.slimscroll.js")"></script>
+    <!-- Waves Effect Plugin Js -->
+    <script src="@Url.Content("~/Content/Template/plugins/node-waves/waves.js")"></script>
+    <!-- Custom Js -->
+    <script src="@Url.Content("~/Content/Template/js/admin.js")"></script>
+    <!-- Demo Js -->
+    <script src="@Url.Content("~/Content/Template/js/demo.js")"></script>
+
+    <script>
+        $(function () {
+            switch("@HttpContext.Current.Request.Url.AbsolutePath"){
+                case "/Home/Dashboard":
+                    $("#dashboardNav").addClass("active")
+                    break;
+                case "/Home/About":
+                    $("#revyouNav").addClass("active")
+                    $("#revyouNavAbout").addClass("active")
+                    break;
+                case "/Home/Contact":
+                    $("#revyouNav").addClass("active")
+                    $("#revyouNavContact").addClass("active")
+                    break;
+            }
+        })
+    </script>
 </body>
 </html>
