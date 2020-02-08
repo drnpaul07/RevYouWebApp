@@ -1,4 +1,4 @@
-﻿Namespace Models
+﻿Namespace ContosoModels
     Public Enum Grade
         A
         B

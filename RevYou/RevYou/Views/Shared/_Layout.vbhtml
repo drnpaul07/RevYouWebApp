@@ -38,6 +38,7 @@
            border-bottom: #0380bc 4px solid !important;
         }
     </style>
+    @RenderSection("local_styles", required:=False)
 </head>
 
 <body class="theme-light-blue">
@@ -370,7 +371,7 @@
                     </li>
 
                     @<li id="reviewersNav">
-                        <a href="javascript:void(0);">
+                        <a href="/User/Reviewer">
                             <i class="material-icons">local_library</i>
                             <span>Reviewers</span>
                         </a>
@@ -467,8 +468,6 @@
             @RenderBody()
         </div>
     </section>
-
-    @RenderSection("scripts", required:=False)
     <!-- Jquery Core Js -->
     <script src="@Url.Content("~/Content/Template/plugins/jquery/jquery.min.js")"></script>
     <!-- Bootstrap Core Js -->
@@ -501,5 +500,6 @@
             }
         })
     </script>
+    @RenderSection("local_scripts", required:=False)
 </body>
 </html>

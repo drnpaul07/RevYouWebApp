@@ -130,12 +130,19 @@ Public Class AccountController
     <ValidateAntiForgeryToken>
     Public Async Function Register(model As RegisterViewModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
+
+            'Default Functions
             Dim user = New ApplicationUser() With {
                 .UserName = model.Username,
                 .Email = model.Email
             }
             Dim result = Await UserManager.CreateAsync(user, model.Password)
             If result.Succeeded Then
+                'Adding Data for UserDatba DbSet
+                Dim revContext As New DAL.RevYouContext
+                revContext.UserData.Add(New Models.Base.UserData() With {.Username = model.Username, .UserID = user.Id})
+                revContext.SaveChanges()
+
                 Await SignInManager.SignInAsync(user, isPersistent:=False, rememberBrowser:=False)
 
                 ' For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

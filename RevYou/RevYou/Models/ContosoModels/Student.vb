@@ -1,4 +1,4 @@
-﻿Namespace Models
+﻿Namespace ContosoModels
     Public Class Student
         Public Property ID As Integer
         Public Property LastName As String

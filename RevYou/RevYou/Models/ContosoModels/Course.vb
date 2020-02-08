@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel.DataAnnotations.Schema
-Namespace Models
+Namespace ContosoModels
     Public Class Course
         <DatabaseGenerated(DatabaseGeneratedOption.None)>
         Public Property CourseID As Integer
