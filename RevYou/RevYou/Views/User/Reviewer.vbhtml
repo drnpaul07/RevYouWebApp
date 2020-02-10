@@ -23,7 +23,7 @@ End Section
 
 <ol class="breadcrumb pull-right">
     <li>
-        <a href="javascript:popupCenter({url: '/User/CreateForm', title: 'Create Form', w: 1100, h: 550});;">
+        <a href="/User/CreateForm">
             <i class="material-icons">home</i> User
         </a>
     </li>
@@ -60,17 +60,17 @@ End Section
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#home_with_icon_title" data-toggle="tab">
-                            <i class="material-icons">home</i> HOME
+                            <i class="material-icons">home</i> REVIEWERS
                         </a>
                     </li>
                     <li role="presentation">
                         <a href="#profile_with_icon_title" data-toggle="tab">
-                            <i class="material-icons">face</i> PROFILE
+                            <i class="material-icons">face</i> ACTIVITY
                         </a>
                     </li>
                     <li role="presentation">
                         <a href="#messages_with_icon_title" data-toggle="tab">
-                            <i class="material-icons">email</i> MESSAGES
+                            <i class="material-icons">email</i> STATUS
                         </a>
                     </li>
                     <li role="presentation">

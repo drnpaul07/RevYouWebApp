@@ -3894,8 +3894,9 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include=".BackupFiles\" />
+    <Folder Include=".BackupFiles\Edited\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Content\RevYou\plugins\" />
     <Folder Include="Migrations\AppConf\" />
     <Folder Include="Migrations\RevConf\" />
     <Folder Include="Views\Administrator\" />

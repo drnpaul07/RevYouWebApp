@@ -1,167 +1,159 @@
 ﻿@Code
-    ViewData("Title") = "CreateForm"
-    Layout = ""
+    ViewData("Title") = "Create Form"
 End Code
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>RevYou| @ViewBag.Title</title>
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-        <!-- Bootstrap Core Css -->
-        <link href="@Url.Content("~/Content/Template/plugins/bootstrap/css/bootstrap.css")" rel="stylesheet">
+@section local_styles
+    <style>
+        .q-card .body{
+            padding-bottom:0px !important;
+            padding-top: 20px !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
 
-        <!-- Waves Effect Css -->
-        <link href="@Url.Content("~/Content/Template/plugins/node-waves/waves.css")" rel="stylesheet" />
+            border-top:solid 5px #03A9F4 !important;
+        }
+        .form-card .body{
+             border-top: solid 5px #0380bc !important;
+        }
+    </style>
+End Section
 
-        <!-- Animation Css -->
-        <link href="@Url.Content("~/Content/Template/plugins/animate-css/animate.css")" rel="stylesheet" />
 
-        <!-- Custom Css -->
-        <link href="@Url.Content("~/Content/Template/css/style.css")" rel="stylesheet">
 
-        <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-        <link href="@Url.Content("~/Content/Template/css/themes/all-themes.css")" rel="stylesheet" />
-        <style>
-            .clearfix{
-                padding-top:15px;
-            }
-            .card{
-                padding-bottom:15px !important;
-            }
-        </style>
-    </head>
-<body class="theme-red">
-    <section class="container">
-        <div class="container-fluid">
-            <!-- Advanced Form Example With Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>ADVANCED FORM EXAMPLE WITH VALIDATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+<ol class="breadcrumb pull-right">
+    <li>
+        <a href="javascript:void(0);">
+            <i class="material-icons">home</i> User
+        </a>
+    </li>
+    <li class="active">
+        <a href="javascript:void(0);">
+            <i class="material-icons">library_books</i> Create Form
+        </a>
+    </li>
+</ol>
+<div class="row clearfix">
+    <!--FORM DETAILS-->
+    <div class="col-lg-12">
+        <div class="card form-card">
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-group-lg">
+                            <div class="form-line">
+                                <input type="text" class="form-control" placeholder="Untitled Form" />
+                            </div>
                         </div>
-                        <div class="body">
-                            <form id="wizard_with_validation" method="POST">
-                                <h3>Account Information</h3>
-                                <fieldset>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" name="username" required>
-                                            <label class="form-label">Username*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="password" class="form-control" name="password" id="password" required>
-                                            <label class="form-label">Password*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="password" class="form-control" name="confirm" required>
-                                            <label class="form-label">Confirm Password*</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <h3>Profile Information</h3>
-                                <fieldset>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" name="name" class="form-control" required>
-                                            <label class="form-label">First Name*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" name="surname" class="form-control" required>
-                                            <label class="form-label">Last Name*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="email" name="email" class="form-control" required>
-                                            <label class="form-label">Email*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <textarea name="address" cols="30" rows="3" class="form-control no-resize" required></textarea>
-                                            <label class="form-label">Address*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input min="18" type="number" name="age" class="form-control" required>
-                                            <label class="form-label">Age*</label>
-                                        </div>
-                                        <div class="help-info">The warning step will show up if age is less than 18</div>
-                                    </div>
-                                </fieldset>
-
-                                <h3>Terms & Conditions - Finish</h3>
-                                <fieldset>
-                                    <input id="acceptTerms-2" name="acceptTerms" type="checkbox" required>
-                                    <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
-                                </fieldset>
-                            </form>
+                        <div class="form-group form-group-sm">
+                            <div class="form-line">
+                                <input type="text" class="form-control" placeholder="Description" />
+                                <div class="help-info">Enter the form description here.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #END# Advanced Form Example With Validation -->
         </div>
-    </section>
-            
-            <!-- Jquery Core Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/jquery/jquery.min.js")"></script>
-            <!-- Bootstrap Core Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/bootstrap/js/bootstrap.js")"></script>
-            <!-- Select Plugin Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/bootstrap-select/js/bootstrap-select.js")"></script>
-            <!-- Slimscroll Plugin Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/jquery-slimscroll/jquery.slimscroll.js")"></script>
-            <!-- Waves Effect Plugin Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/node-waves/waves.js")"></script>
-            <!-- Custom Js -->
-            <script src="@Url.Content("~/Content/Template/js/admin.js")"></script>
-            <!-- Demo Js -->
-            <script src="@Url.Content("~/Content/Template/js/demo.js")"></script>
+    </div>
 
+    <!--QUESTIONS-->
+    <div class="col-lg-12">
+        <!--QUESTIONS ROW-->
+        <div class="row" id="questions-row">
+            <!--QUESTION COL-->
+            <div class="col-lg-12 question-col">
+                <div class="card q-card">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Question" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Answer" />
+                                        <div class="help-info">Answer strings are not case sensitive</div>
+                                    </div>
+                                </div>
+                                <div class="align-center">
+                                    <button type="button" class="btn btn-danger btn-circle waves-effect waves-circle waves-float remove-question-btn">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>     
+    </div>
+    <div class="col-lg-12 align-center">
+        <button id="add-question-btn" type="button" class="btn btn-default btn-circle-lg waves-effect waves-circle waves-float"
+                data-toggle="tooltip" data-placement="bottom" title="Click to add a Question">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+</div>
 
-            <script src="@Url.Content("~/Content/Template/js/pages/forms/form-wizard.js")"></script>
-            <!-- Jquery Validation Plugin Css -->
-            <script src="@Url.Content("~/Content/Template/plugins/jquery-validation/jquery.validate.js")"></script>
+@section local_scripts
+<script>
+    $(function () {
+        var max_questions = 4; //maximum input boxes allowed is 5
+        var wrapper = $("#questions-row"); //Fields wrapper
+        var add_button = $("#add-question-btn"); //Add button ID
+        var x = 0; //initlal text box count
+        $(add_button).click(
+                    function (e) {
+                        //on add input button click
+                        e.preventDefault();
+                        if (x >= max_questions) {
+                            alert("Maximum question count has been Reached");
+                        } else {
+                            $(wrapper).append(
+                               '<div class="col-lg-12 question-col">'+
+                                    '<div class="card q-card">'+
+                                        '<div class="body">'+
+                                            '<div class="row clearfix">'+
+                                                '<div class="col-lg-12">'+
+                                                    '<div class="form-group">'+
+                                                        '<div class="form-line">'+
+                                                            '<input type="text" class="form-control" placeholder="Question" />'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="form-group">'+
+                                                        '<div class="form-line">'+
+                                                            '<input type="text" class="form-control" placeholder="Answer" />'+
+                                                            '<div class="help-info">Answer strings are not case sensitive</div>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="align-center">'+
+                                                        '<button type="button" class="btn btn-danger btn-circle waves-effect waves-circle waves-float remove-question-btn">' +
+                                                            '<i class="material-icons">close</i>'+
+                                                        '</button>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                            )
+                            x++;
+                        }
+                    })
 
-            <!-- JQuery Steps Plugin Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/jquery-steps/jquery.steps.js")"></script>
-
-            <!-- Sweet Alert Plugin Js -->
-            <script src="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.min.js")"></script>
-            
-            <!--FOR REFRESHING THE PARENT-->
-            <script>
-                window.onunload = refreshParent;
-                function refreshParent() {
-                    window.opener.location.reload();
-                }
-            </script>
-</body>
-</html>
+        $(wrapper).on("click", ".remove-question-btn", function (e) {
+            //user click on remove field
+            e.preventDefault();
+            if (x <= 0) {
+                alert("Cannot remove the last Question")
+            } else {
+                $(this).parent().parent().parent().parent().parent(".q-card").remove();
+                x--;
+            }
+               
+            });
+    })
+</script>
+End Section
 
