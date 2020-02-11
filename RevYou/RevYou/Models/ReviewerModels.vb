@@ -10,7 +10,7 @@ Namespace Models.Reviewer
         Public Property Description As String
 
         'This is the connected DbSet for this DbSet.
-        Public Overridable Property Questions As ICollection(Of Question)
+        Public Overridable Property Questions As IList(Of Question)
         'This is the creator
         Public Overridable Property User As UserData
     End Class
