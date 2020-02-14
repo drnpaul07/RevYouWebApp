@@ -1,4 +1,4 @@
-﻿@ModelType IEnumerable(Of RevYou.Models.Enrollment)
+﻿@ModelType IEnumerable(Of RevYou.ContosoModels.Enrollment)
 @Code
 ViewData("Title") = "Index"
 End Code

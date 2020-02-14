@@ -231,8 +231,9 @@
     <Compile Include="Controllers\AccountController.vb" />
     <Compile Include="Controllers\AdministratorController.vb" />
     <Compile Include="Controllers\ContosoControllers\ContosoController.vb" />
+    <Compile Include="Controllers\ContosoControllers\CoursesController.vb" />
     <Compile Include="Controllers\ContosoControllers\EnrollmentsController.vb" />
-    <Compile Include="Controllers\ManageController.vb" />
+    <Compile Include="fonts\ManageController.vb" />
     <Compile Include="Controllers\ContosoControllers\StudentsController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="DAL\RevYouContext.vb" />
@@ -241,18 +242,15 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002081650551_RevMig.Designer.vb">
-      <DependentUpon>202002081650551_RevMig.vb</DependentUpon>
+    <Compile Include="Migrations\202002131716252_APP_INIT.Designer.vb">
+      <DependentUpon>202002131716252_APP_INIT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002081650551_RevMig.vb" />
-    <Compile Include="Migrations\202002081657285_AppMig.Designer.vb">
-      <DependentUpon>202002081657285_AppMig.vb</DependentUpon>
+    <Compile Include="Migrations\202002131716252_APP_INIT.vb" />
+    <Compile Include="Migrations\202002140858513_REV_INIT.Designer.vb">
+      <DependentUpon>202002140858513_REV_INIT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002081657285_AppMig.vb" />
-    <Compile Include="Migrations\202002081710551_RevMig.Designer.vb">
-      <DependentUpon>202002081710551_RevMig.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002081710551_RevMig.vb" />
+    <Compile Include="Migrations\202002140858513_REV_INIT.vb" />
+    <Compile Include="Migrations\ContoConf.vb" />
     <Compile Include="Migrations\AppConf.vb" />
     <Compile Include="Migrations\RevConf.vb" />
     <Compile Include="Models\AccountViewModels.vb" />
@@ -263,6 +261,7 @@
     <Compile Include="Models\ReviewerModels.vb" />
     <Compile Include="Models\IdentityModels.vb" />
     <Compile Include="Models\ManageViewModels.vb" />
+    <Compile Include="Models\ViewModels\CommonViewModels.vb" />
     <Compile Include="Models\ViewModels\UserViewModels.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -283,14 +282,11 @@
     <Compile Include="Startup.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202002081650551_RevMig.resx">
-      <DependentUpon>202002081650551_RevMig.vb</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002131716252_APP_INIT.resx">
+      <DependentUpon>202002131716252_APP_INIT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002081657285_AppMig.resx">
-      <DependentUpon>202002081657285_AppMig.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002081710551_RevMig.resx">
-      <DependentUpon>202002081710551_RevMig.vb</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002140858513_REV_INIT.resx">
+      <DependentUpon>202002140858513_REV_INIT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -3864,6 +3860,11 @@
     <Content Include="Views\Enrollments\Index.vbhtml" />
     <Content Include="Views\User\Reviewer.vbhtml" />
     <Content Include="Views\User\CreateForm.vbhtml" />
+    <Content Include="Views\Courses\Create.vbhtml" />
+    <Content Include="Views\Courses\Delete.vbhtml" />
+    <Content Include="Views\Courses\Details.vbhtml" />
+    <Content Include="Views\Courses\Edit.vbhtml" />
+    <Content Include="Views\Courses\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -3898,6 +3899,7 @@
     <Folder Include=".BackupFiles\Edited\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\RevYou\plugins\" />
+    <Folder Include="Controllers\Test\" />
     <Folder Include="Migrations\AppConf\" />
     <Folder Include="Migrations\RevConf\" />
     <Folder Include="Views\Administrator\" />

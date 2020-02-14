@@ -23,7 +23,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Contoso")</li>
                     <li>@Html.ActionLink("About", "About", "Contoso")</li>
                     <li>@Html.ActionLink("Students", "Index", "Students")</li>
-                    <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+                    <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
                     <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
                     <li>@Html.ActionLink("Departments", "Index", "Department")</li>
                     <li>@Html.ActionLink("Enrollments", "Index", "Enrollments")</li>

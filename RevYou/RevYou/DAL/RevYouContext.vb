@@ -14,6 +14,8 @@ Namespace DAL
         Public Property Form As DbSet(Of Form)
         Public Property Question As DbSet(Of Question)
         Public Property UserData As DbSet(Of UserData)
+        Public Property Category As DbSet(Of Category)
+        Public Property Tag As DbSet(Of Tag)
 
         'Pluralizer ( on DB ) can be enabled by deleting this overriding sub
         Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)

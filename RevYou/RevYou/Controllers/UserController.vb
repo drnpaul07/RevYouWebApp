@@ -4,6 +4,9 @@ Imports RevYou.Models.Reviewer
 Imports RevYou.ViewModels.User
 Imports Microsoft.AspNet.Identity
 Imports RevYou.DAL
+Imports System.Data.Entity
+
+
 
 Namespace Controllers
     <Authorize(Roles:="USER")>
@@ -22,6 +25,7 @@ Namespace Controllers
         End Function
 
         Function CreateForm() As ActionResult
+            ViewBag.Categories = db.Category.ToList
             Return View()
         End Function
 
@@ -30,24 +34,38 @@ Namespace Controllers
         <ActionName("CreateForm")>
         Public Function SubmitFormDetails(model As ReviewerViewModel) As ActionResult
 
-            Debug.WriteLine(model.Title)
-            Debug.WriteLine(model.Description)
-            For Each item In model.Questions
-                Debug.WriteLine(item.Statement)
-                Debug.WriteLine(item.Answer)
-            Next
             If ModelState.IsValid Then
                 Dim form As Form = New Form()
                 form.Title = model.Title
-                form.Description = model.Description                form.Questions = model.Questions
-                'form.User.UserID = User.Identity.GetUserId
-                'form.User.Username = User.Identity.GetUserName
+                form.Description = model.Description
+                form.Questions = model.Questions
+
+                Dim creator = db.UserData.Where(Function(u) u.Username = model.Username).FirstOrDefault()
+                Dim category = db.Category.Where(Function(c) c.CategoryID = model.CategoryID).FirstOrDefault()
+
+                'Iterating tag list to Tag object
+                Dim tagList As IList(Of Tag) = New List(Of Tag)()
+                For Each item In model.Tags
+                    Dim tag As Tag = New Tag()
+                    'Checks if the tag is defined in the database
+                    Dim tagCheck As Tag = db.Tag.Where(Function(t) t.Name = item).FirstOrDefault()
+                    If tagCheck Is Nothing Then
+                        tag.Name = item
+                        tag.Usage = 1
+                        tagList.Add(tag)
+                    Else
+                        tagCheck.Usage = tagCheck.Usage + 1
+                        db.Entry(tagCheck).State = EntityState.Modified
+                    End If
+                Next
+
+                form.User = creator
+                form.Category = category
+                'I dont know if this can be nullable (if yes then this is good)
+                form.Tags = tagList
 
                 db.Form.Add(form)
-                'VALIDATION ERROR HERE!!! I THINK ITS ABOUT HOW I MADE THE DB SETS RELATED TO EACH OTHER 
-                'in this instance im just using the FORM DBSET which is connected to 2 DBSET.
                 db.SaveChanges()
-
             End If
 
             'This should be a return url parameter but i would do that later

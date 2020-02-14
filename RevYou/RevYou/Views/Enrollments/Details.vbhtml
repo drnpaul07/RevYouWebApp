@@ -1,4 +1,4 @@
-﻿@ModelType RevYou.Models.Enrollment
+﻿@ModelType RevYou.ContosoModels.Enrollment
 @Code
     ViewData("Title") = "Details"
 End Code

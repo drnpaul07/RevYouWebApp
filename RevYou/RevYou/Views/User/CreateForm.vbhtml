@@ -6,6 +6,14 @@ End Code
 @section local_styles
 <!-- Sweetalert Css -->
 <link href="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.css")" rel="stylesheet" />
+<!-- Bootstrap Tagsinput Css -->
+<link href="@Url.Content("~/Content/Template/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css")" rel="stylesheet">
+<!-- Bootstrap Select Css -->
+<link href="@Url.Content("~/Content/Template/plugins/bootstrap-select/css/bootstrap-select.css")" rel="stylesheet" />
+<!-- Multi Select Css -->
+<link href="@Url.Content("~/Content/Template/plugins/multi-select/css/multi-select.css")" rel="stylesheet">
+
+
 
     <style>
         .q-card .body{
@@ -18,6 +26,20 @@ End Code
         }
         .form-card .body{
              border-top: solid 5px #0380bc !important;
+        }
+        /*Some Live Search UI Positioning Problem*/
+        .category-select-ls .bs-searchbox{
+            margin-left: 30px !important;
+        }
+        .category-select-ls .dropdown-menu .inner{
+            margin-left: 30px !important;
+        }
+        .category-select-ls .glyphicon{
+            margin-top: 11px !important;
+        }
+
+        .bootstrap-tagsinput{
+            display:block !important;
         }
     </style>
 End Section
@@ -37,8 +59,10 @@ End Section
     </li>
 </ol>
 
-@Using Html.BeginForm("CreateForm", "User", FormMethod.Post, New With {.role = "form", .id = "create_form"})
+@*@Using Html.BeginForm("CreateForm", "User", FormMethod.Post, New With {.role = "form", .id = "create_form"})*@
+@Using (Html.BeginForm())
 @Html.AntiForgeryToken()
+    @<input id = "Username" name="Username" type="hidden" value="@User.Identity.Name">
 @<div Class="row clearfix">
     <!--FORM DETAILS-->
     <div Class="col-lg-12">
@@ -49,7 +73,7 @@ End Section
                         <div Class="form-group form-group-lg">
                             <div Class="form-line">
                                 @Html.TextBoxFor(Function(m) m.Title,
-                New With {.class = "form-control", .placeholder = "Untitled Form"})
+New With {.class = "form-control", .placeholder = "Untitled Form"})
                                 @*<input type = "text" Class="form-control" placeholder="Untitled Form"
                                        id="Title" name="Title"/>*@
                             </div>
@@ -57,10 +81,35 @@ End Section
                         <div Class="form-group form-group-sm">
                             <div Class="form-line">
                                 @Html.TextBoxFor(Function(m) m.Description,
-                           New With {.class = "form-control", .placeholder = "Description"})
+New With {.class = "form-control", .placeholder = "Description"})
                                 @*<input type = "text" Class="form-control" placeholder="Description"
                                        id="Description" name="Description"/>*@
                                 <div Class="help-info">Enter the form description here.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row p-r-10 p-l-10">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <div class="category-select-ls">
+                                    <select id="CategoryID" name="CategoryID" class="form-control show-tick" data-live-search="true" required>
+                                        <option value="" selected>-- Please Select Category --</option>
+                                        @For Each item In ViewBag.Categories
+                                            @<option value = "@item.CategoryID">@item.Name</Option>
+                                        Next
+                                    </select>
+                                    <div Class="help-info">Select the form category.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div Class="col-sm-12 col-md-12">   
+                            <div class="form-group demo-tagsinput-area">
+                                <div class="form-line">
+                                    @*<input type="text" class="form-control" data-role="tagsinput">*@
+                                    <select id="Tags" name="Tags" multiple="" data-role="tagsinput" style="display:none !important;" required>
+                                    </select>
+                                </div>
+                                <div Class="help-info">Enter tags related for this form.</div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +153,7 @@ End Section
             </div>
         </div>
     </div>
-    <div Class="col-lg-12 align-center">
+    <div Class="col-lg-12 align-center p-b-10">
         <!--ADD QUESTION BUTTON-->
         <Button id = "add-question-btn" type="button" Class="btn btn-primary btn-circle-lg waves-effect waves-circle waves-float"
                 data-toggle="tooltip" data-placement="bottom" title="Click to add a Question">
@@ -123,8 +172,17 @@ End Using
 @section local_scripts
 <!-- SweetAlert Plugin Js -->
 <script src="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.min.js")"></script>
+<!-- Bootstrap Tags Input Plugin Js -->
+<script src="@Url.Content("~/Content/Template/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js")"></script>
+<!-- Select Plugin Js -->
+<script src="@Url.Content("~/Content/Template/plugins/bootstrap-select/js/bootstrap-select.js")"></script>  
+<!-- Multi Select Plugin Js -->
+<script src="@Url.Content("~/Content/Template/plugins/multi-select/js/jquery.multi-select.js")"></script> 
+
 <script>
     $(function () {
+        $('#CategoryID').selectpicker();
+
         arrangeModelBinding(); //arranging model binding
         var max_questions = 4; //maximum input boxes allowed is 5
         var wrapper = $("#questions-row"); //Fields wrapper
