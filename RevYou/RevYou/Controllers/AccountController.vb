@@ -140,7 +140,7 @@ Public Class AccountController
             If result.Succeeded Then
                 'Adding Data for UserDatba DbSet
                 Dim revContext As New DAL.RevYouContext
-                revContext.UserData.Add(New Models.Base.UserData() With {.Username = model.Username})
+                revContext.UserData.Add(New Models.Base.UserData() With {.Username = model.Username, .Firstname = model.Firstname, .Surname = model.Surname})
                 revContext.SaveChanges()
 
                 Await SignInManager.SignInAsync(user, isPersistent:=False, rememberBrowser:=False)

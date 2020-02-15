@@ -24,6 +24,7 @@ Namespace Migrations.RevConf
                         .FormID = c.Int(nullable := False, identity := True),
                         .Title = c.String(),
                         .Description = c.String(),
+                        .DateCreated = c.DateTime(nullable := False),
                         .UserDataID = c.Int(nullable := False),
                         .CategoryID = c.Int(nullable := False)
                     }) _
@@ -65,7 +66,9 @@ Namespace Migrations.RevConf
                 Function(c) New With
                     {
                         .UserDataID = c.Int(nullable := False, identity := True),
-                        .Username = c.String()
+                        .Username = c.String(),
+                        .Firstname = c.String(),
+                        .Surname = c.String()
                     }) _
                 .PrimaryKey(Function(t) t.UserDataID)
             

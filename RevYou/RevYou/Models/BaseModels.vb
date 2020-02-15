@@ -5,6 +5,8 @@ Namespace Models.Base
     Public Class UserData
         Public Property UserDataID As Integer
         Public Property Username As String
+        Public Property Firstname As String
+        Public Property Surname As String
 
         'Collection Models
         Public Overridable Property Forms As ICollection(Of Form)

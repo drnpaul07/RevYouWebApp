@@ -72,16 +72,14 @@ End Section
                     <div Class="col-sm-12">
                         <div Class="form-group form-group-lg">
                             <div Class="form-line">
-                                @Html.TextBoxFor(Function(m) m.Title,
-New With {.class = "form-control", .placeholder = "Untitled Form"})
+                                @Html.TextBoxFor(Function(m) m.Title, New With {.class = "form-control", .placeholder = "Untitled Form"})
                                 @*<input type = "text" Class="form-control" placeholder="Untitled Form"
                                        id="Title" name="Title"/>*@
                             </div>
                         </div>
                         <div Class="form-group form-group-sm">
                             <div Class="form-line">
-                                @Html.TextBoxFor(Function(m) m.Description,
-New With {.class = "form-control", .placeholder = "Description"})
+                                @Html.TextBoxFor(Function(m) m.Description, New With {.class = "form-control", .placeholder = "Description"})
                                 @*<input type = "text" Class="form-control" placeholder="Description"
                                        id="Description" name="Description"/>*@
                                 <div Class="help-info">Enter the form description here.</div>

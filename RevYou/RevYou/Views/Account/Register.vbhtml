@@ -58,6 +58,22 @@ End Code
                     </div>
                     @<div Class="input-group">
                         <span Class="input-group-addon">
+                            <i Class="material-icons">person</i>
+                        </span>
+                        <div Class="form-line">
+                            <input type="text" Class="form-control" name="Firstname" id="Firstname" placeholder="Firstname" required>
+                        </div>
+                    </div>
+                    @<div Class="input-group">
+                        <span Class="input-group-addon">
+                            <i Class="material-icons">person</i>
+                        </span>
+                        <div Class="form-line">
+                            <input type="text" Class="form-control" name="Surname" id="Surname" placeholder="Surname" required>
+                        </div>
+                    </div>
+                    @<div Class="input-group">
+                        <span Class="input-group-addon">
                             <i Class="material-icons">email</i>
                         </span>
                         <div Class="form-line">

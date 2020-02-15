@@ -24,7 +24,7 @@ Namespace Migrations.RevConf
 
             For Each user In userList
                 context.UserData.AddOrUpdate(
-                    New UserData() With {.Username = user.UserName})
+                    New UserData() With {.Username = user.UserName, .Firstname = "John", .Surname = "Doe"})
             Next
 
             Dim category = New List(Of Category)() From {

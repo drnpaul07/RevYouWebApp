@@ -21,6 +21,10 @@ Namespace Controllers
         'End Function
 
         Function Reviewer() As ActionResult
+
+            Dim currentUsername As String = User.Identity.Name
+            ViewBag.UserForms = db.Form.Where(Function(m) m.UserDataID = db.UserData.Where(Function(n) n.Username = currentUsername).FirstOrDefault.UserDataID).ToList()
+            ViewBag.UserData = db.UserData.Where(Function(m) m.Username = currentUsername).FirstOrDefault
             Return View()
         End Function
 
@@ -38,6 +42,7 @@ Namespace Controllers
                 Dim form As Form = New Form()
                 form.Title = model.Title
                 form.Description = model.Description
+                form.DateCreated = DateTime.Now
                 form.Questions = model.Questions
 
                 Dim creator = db.UserData.Where(Function(u) u.Username = model.Username).FirstOrDefault()

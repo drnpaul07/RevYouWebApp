@@ -8,6 +8,7 @@ Namespace Models.Reviewer
         Public Property FormID As Integer
         Public Property Title As String
         Public Property Description As String
+        Public Property DateCreated As DateTime
 
         'This is the connected DbSet for this DbSet.
         Public Overridable Property Questions As IList(Of Question)

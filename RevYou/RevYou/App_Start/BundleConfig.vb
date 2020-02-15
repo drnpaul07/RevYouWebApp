@@ -23,7 +23,18 @@ Public Module BundleConfig
                   "~/Content/bootstrap.css",
                   "~/Content/site.css"))
 
-
+        'JQuery DataTables
+        bundles.Add(New ScriptBundle("~/bundles/script/jquery-datatables").Include(
+                        "~/Content/Template/plugins/jquery-datatable/jquery.dataTables.js",
+                        "~/Content/Template/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/buttons.flash.min.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/jszip.min.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/pdfmake.min.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/vfs_fonts.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/buttons.html5.min.js",
+                        "~/Content/Template/plugins/jquery-datatable/extensions/export/buttons.print.min.js"
+                    ))
     End Sub
 End Module
 
