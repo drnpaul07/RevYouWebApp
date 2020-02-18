@@ -28,6 +28,11 @@ Public Module RouteConfig
             url:="{controller}/{action}/{id}",
             defaults:=New With {.controller = "Home", .action = "Index", .id = UrlParameter.Optional}
         )
+        routes.MapRoute(
+           name:="UserRoute",
+           url:="{controller}/{action}/{id}",
+           defaults:=New With {.controller = "Home", .action = "Index", .id = UrlParameter.Optional}
+       )
         'END OF MY ROUTE CONFIG
 
 

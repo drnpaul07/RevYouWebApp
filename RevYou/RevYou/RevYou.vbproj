@@ -233,6 +233,7 @@
     <Compile Include="Controllers\ContosoControllers\ContosoController.vb" />
     <Compile Include="Controllers\ContosoControllers\CoursesController.vb" />
     <Compile Include="Controllers\ContosoControllers\EnrollmentsController.vb" />
+    <Compile Include="Controllers\Tools\UserTools.vb" />
     <Compile Include="fonts\ManageController.vb" />
     <Compile Include="Controllers\ContosoControllers\StudentsController.vb" />
     <Compile Include="Controllers\UserController.vb" />
@@ -246,10 +247,14 @@
       <DependentUpon>202002131716252_APP_INIT.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202002131716252_APP_INIT.vb" />
-    <Compile Include="Migrations\202002151735124_REV_INIT.Designer.vb">
-      <DependentUpon>202002151735124_REV_INIT.vb</DependentUpon>
+    <Compile Include="Migrations\202002171705335_REV_INIT.Designer.vb">
+      <DependentUpon>202002171705335_REV_INIT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002151735124_REV_INIT.vb" />
+    <Compile Include="Migrations\202002171705335_REV_INIT.vb" />
+    <Compile Include="Migrations\202002171737508_CONTO_INIT.Designer.vb">
+      <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002171737508_CONTO_INIT.vb" />
     <Compile Include="Migrations\ContoConf.vb" />
     <Compile Include="Migrations\AppConf.vb" />
     <Compile Include="Migrations\RevConf.vb" />
@@ -285,8 +290,11 @@
     <EmbeddedResource Include="Migrations\202002131716252_APP_INIT.resx">
       <DependentUpon>202002131716252_APP_INIT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002151735124_REV_INIT.resx">
-      <DependentUpon>202002151735124_REV_INIT.vb</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002171705335_REV_INIT.resx">
+      <DependentUpon>202002171705335_REV_INIT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002171737508_CONTO_INIT.resx">
+      <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -3865,6 +3873,7 @@
     <Content Include="Views\Courses\Details.vbhtml" />
     <Content Include="Views\Courses\Edit.vbhtml" />
     <Content Include="Views\Courses\Index.vbhtml" />
+    <Content Include="Views\User\EditForm.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

@@ -62,7 +62,7 @@ End Section
 @*@Using Html.BeginForm("CreateForm", "User", FormMethod.Post, New With {.role = "form", .id = "create_form"})*@
 @Using (Html.BeginForm())
 @Html.AntiForgeryToken()
-    @<input id = "Username" name="Username" type="hidden" value="@User.Identity.Name">
+    @*@<input id = "Username" name="Username" type="hidden" value="@User.Identity.Name">*@
 @<div Class="row clearfix">
     <!--FORM DETAILS-->
     <div Class="col-lg-12">

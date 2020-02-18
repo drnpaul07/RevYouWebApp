@@ -2,8 +2,8 @@
     ViewData("Title") = "Reviewers"
 End Code
 @section local_styles
-<!-- JQuery DataTable Css -->
-<link href="@Url.Content("~/Content/Template/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css")" rel="stylesheet">
+<!-- Sweetalert Css -->
+<link href="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.css")" rel="stylesheet" />
     <style>
         #reviewer-container{
             min-height: 75vh  !important;
@@ -22,7 +22,8 @@ End Code
 End Section
 
 @section local_scripts
-@Scripts.Render("~/bundles/script/jquery-datatables")
+<!-- SweetAlert Plugin Js -->
+<script src="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.min.js")"></script>
 <Script src="@Url.Content("~/Content/RevYou/js/rev-popup.js")"></Script>
 <script>
     $(function () {
@@ -30,6 +31,34 @@ End Section
             responsive: true
         });
     })
+
+    function deleteForm(formID) {
+        var form = $(formID)
+        swal({
+            title: "Delete",
+            text: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+   		    function (isConfirm) {
+   			    if (isConfirm) {
+   				    form.submit();
+   			    } else {
+   				    swal({
+   					    title: "Aborted",
+   					    text: "Action was not saved",
+   					    type: "error",
+   					    showConfirmButton: true,
+   					    closeOnConfirm: false
+   				    });
+   			    }
+   		    });
+    }
 </script>
 End Section
 
@@ -72,6 +101,12 @@ End Section
                     @<h1>THIS IS EMPTY</h1>
                 End If
                 @For Each form In ViewBag.UserForms
+
+                @Code
+                    Dim submitLink As String = "/DeleteForm/" & form.FormID
+                    Dim formID As String = "deleteForm" & form.FormID
+                End Code
+
                 @<!--START OF POST-->
                     @<div Class="panel panel-default panel-post">
                         <div Class="panel-heading">
@@ -109,25 +144,30 @@ End Section
                         </div>
                         <div Class="panel-footer">
                             <ul>
-                                                            <li>
-                                                            <a href = "#" >
+                                <li>
+                                                            <a href = "/User/Preview/@form.FormID" >
                                         <i class="material-icons">visibility</i>
-                                                            <span> View</span>
+                                                            <span> Preview</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                                            <a href = "#" >
+                                                            <a href = "/User/EditForm/@form.FormID" >
                                         <i class="material-icons">mode_edit</i>
                                                             <span> Edit</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                                            <a href = "#" >
-                                        <i class="material-icons">delete</i>
-                                                            <span> Delete</span>
-                                    </a>
+                                    
+                                    @Using Html.BeginForm(submitLink, "User", FormMethod.Post, New With {.role = "form", .id = formId})
+                                        @Html.AntiForgeryToken()
+                                        @<a href="javascript:deleteForm(@formId)">
+                                            <i class="material-icons">delete</i>
+                                            <span> Delete</span>
+                                        </a>
+                                    End Using
+                                                            
                                 </li>
                             
                                 <li>
@@ -139,7 +179,7 @@ End Section
 
                                 <li>
                                                             <div Class="icon-container">
-                                        <a href = "#" >
+                                        <a href = "/User/ShareForm/@form.FormID" >
                                             <i class="material-icons">share</i>
                                                                 <span> Share</span>
                                         </a>
@@ -156,7 +196,7 @@ End Section
                         </div>
                     </div>
                     @<!--END OF POST-->
-                Next
+                        Next
             </div>
         </div>
     </div>

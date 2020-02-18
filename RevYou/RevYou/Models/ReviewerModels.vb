@@ -52,9 +52,16 @@ Namespace Models.Reviewer
         Public Property TagID As Integer
         Public Property Name As String
         Public Property Usage As Integer
-
-        Public Property FormID As Integer
-        Public Overridable Property Form As Form
     End Class
+
+    'Public Class FormTag
+    '    Public Property FormTagID As Integer
+
+    '    Public Property FormID As Integer
+    '    Public Overridable Property Form As Form
+
+    '    Public Property TagID As Integer
+    '    Public Overridable Property Tag As Tag
+    'End Class
 
 End Namespace
