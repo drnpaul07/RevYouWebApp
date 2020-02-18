@@ -55,11 +55,11 @@ Namespace Migrations.RevConf
                         .TagID = c.Int(nullable := False, identity := True),
                         .Name = c.String(),
                         .Usage = c.Int(nullable := False),
-                        .Form_FormID = c.Int()
+                        .FormID = c.Int(nullable := False)
                     }) _
                 .PrimaryKey(Function(t) t.TagID) _
-                .ForeignKey("dbo.Form", Function(t) t.Form_FormID) _
-                .Index(Function(t) t.Form_FormID)
+                .ForeignKey("dbo.Form", Function(t) t.FormID, cascadeDelete := True) _
+                .Index(Function(t) t.FormID)
             
             CreateTable(
                 "dbo.UserData",
@@ -76,10 +76,10 @@ Namespace Migrations.RevConf
         
         Public Overrides Sub Down()
             DropForeignKey("dbo.Form", "UserDataID", "dbo.UserData")
-            DropForeignKey("dbo.Tag", "Form_FormID", "dbo.Form")
+            DropForeignKey("dbo.Tag", "FormID", "dbo.Form")
             DropForeignKey("dbo.Question", "FormID", "dbo.Form")
             DropForeignKey("dbo.Form", "CategoryID", "dbo.Category")
-            DropIndex("dbo.Tag", New String() { "Form_FormID" })
+            DropIndex("dbo.Tag", New String() { "FormID" })
             DropIndex("dbo.Question", New String() { "FormID" })
             DropIndex("dbo.Form", New String() { "CategoryID" })
             DropIndex("dbo.Form", New String() { "UserDataID" })

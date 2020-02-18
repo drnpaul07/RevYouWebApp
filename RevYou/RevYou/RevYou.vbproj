@@ -247,14 +247,14 @@
       <DependentUpon>202002131716252_APP_INIT.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202002131716252_APP_INIT.vb" />
-    <Compile Include="Migrations\202002171705335_REV_INIT.Designer.vb">
-      <DependentUpon>202002171705335_REV_INIT.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002171705335_REV_INIT.vb" />
     <Compile Include="Migrations\202002171737508_CONTO_INIT.Designer.vb">
       <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202002171737508_CONTO_INIT.vb" />
+    <Compile Include="Migrations\202002180121253_REV_INIT.Designer.vb">
+      <DependentUpon>202002180121253_REV_INIT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002180121253_REV_INIT.vb" />
     <Compile Include="Migrations\ContoConf.vb" />
     <Compile Include="Migrations\AppConf.vb" />
     <Compile Include="Migrations\RevConf.vb" />
@@ -290,11 +290,11 @@
     <EmbeddedResource Include="Migrations\202002131716252_APP_INIT.resx">
       <DependentUpon>202002131716252_APP_INIT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002171705335_REV_INIT.resx">
-      <DependentUpon>202002171705335_REV_INIT.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002171737508_CONTO_INIT.resx">
       <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002180121253_REV_INIT.resx">
+      <DependentUpon>202002180121253_REV_INIT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

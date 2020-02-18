@@ -13,7 +13,7 @@ Namespace Migrations.RevConf
         
         Private ReadOnly Property IMigrationMetadata_Id() As String Implements IMigrationMetadata.Id
             Get
-                Return "202002171705335_REV_INIT"
+                Return "202002180121253_REV_INIT"
             End Get
         End Property
         
