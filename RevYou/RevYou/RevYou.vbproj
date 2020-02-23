@@ -251,10 +251,10 @@
       <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202002171737508_CONTO_INIT.vb" />
-    <Compile Include="Migrations\202002180121253_REV_INIT.Designer.vb">
-      <DependentUpon>202002180121253_REV_INIT.vb</DependentUpon>
+    <Compile Include="Migrations\202002180336316_REV_INIT.Designer.vb">
+      <DependentUpon>202002180336316_REV_INIT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002180121253_REV_INIT.vb" />
+    <Compile Include="Migrations\202002180336316_REV_INIT.vb" />
     <Compile Include="Migrations\ContoConf.vb" />
     <Compile Include="Migrations\AppConf.vb" />
     <Compile Include="Migrations\RevConf.vb" />
@@ -293,8 +293,8 @@
     <EmbeddedResource Include="Migrations\202002171737508_CONTO_INIT.resx">
       <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002180121253_REV_INIT.resx">
-      <DependentUpon>202002180121253_REV_INIT.vb</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002180336316_REV_INIT.resx">
+      <DependentUpon>202002180336316_REV_INIT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -3874,6 +3874,7 @@
     <Content Include="Views\Courses\Edit.vbhtml" />
     <Content Include="Views\Courses\Index.vbhtml" />
     <Content Include="Views\User\EditForm.vbhtml" />
+    <Content Include="Views\User\_FormList.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

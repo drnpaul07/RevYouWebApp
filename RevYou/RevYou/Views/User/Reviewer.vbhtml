@@ -30,6 +30,7 @@ End Section
         $('#reviewer-table').DataTable({
             responsive: true
         });
+        
     })
 
     function deleteForm(formID) {
@@ -135,8 +136,8 @@ End Section
                                         </div>
                                     </div>
                                     <div Class="post-tags">
-                                        @For Each tag In form.Tags
-                                            @<span Class="label bg-blue">@tag.Name</span>
+                                        @For Each formTag In form.FormTags
+                                            @<span Class="label bg-blue">@formTag.Tag.Name</span>
                                         Next
                                     </div>
                                 </div>
@@ -196,7 +197,16 @@ End Section
                         </div>
                     </div>
                     @<!--END OF POST-->
-                        Next
+                    Next
+                    @If ViewBag.IsAllDisplayed Then
+                        @<h1>All is Displayed</h1>
+                    Else
+                        @Using Html.BeginForm("Reviewer", "User", FormMethod.Get, New With {.role = "form", .id = "showmore_form"})
+                            @<input name="viewMode" id="viewMode" type="hidden" value="offset" />
+                            @<input name="currentDisplayed" id="currentDisplayed" type="hidden" value="@ViewBag.UserForms.count()" />
+                            @<a href="javascript:document.getElementById('showmore_form').submit()">Show more</a>
+                        End Using
+                    End If
             </div>
         </div>
     </div>

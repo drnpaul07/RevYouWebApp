@@ -21,11 +21,28 @@ Namespace Controllers
         '    Return View()
         'End Function
 
-        Function Reviewer() As ActionResult
+        Function Reviewer(viewMode As String, Optional currentDisplayed As Integer = 2) As ActionResult
 
             Dim currentUsername As String = User.Identity.Name
-            ViewBag.UserForms = db.Form.Where(Function(m) m.UserDataID = db.UserData.Where(Function(n) n.Username = currentUsername).FirstOrDefault.UserDataID).ToList()
+            Dim userForms As IList(Of Form) = db.Form.Where(Function(m) m.UserDataID =
+                                                  db.UserData.Where(Function(n) n.Username = currentUsername) _
+                                                  .FirstOrDefault.UserDataID).ToList
+
+            If viewMode = "offset" Then
+                currentDisplayed = currentDisplayed + 5
+            ElseIf viewMode = "all" Then
+                currentDisplayed = userForms.Count
+            End If
+
+            ViewBag.UserForms = userForms.OrderByDescending(Function(m) m.DateCreated).Take(currentDisplayed).ToList
             ViewBag.UserData = db.UserData.Where(Function(m) m.Username = currentUsername).FirstOrDefault
+
+            If currentDisplayed >= userForms.Count Then
+                ViewBag.IsAllDisplayed = True
+            Else
+                ViewBag.IsAllDisplayed = False
+            End If
+
             Return View()
         End Function
 
@@ -50,27 +67,38 @@ Namespace Controllers
 
                 Dim creator = db.UserData.Where(Function(u) u.Username = model.Username).FirstOrDefault()
                 Dim category = db.Category.Where(Function(c) c.CategoryID = model.CategoryID).FirstOrDefault()
+                Dim currentFormTags As IList(Of FormTag) = New List(Of FormTag)
 
-                'Iterating tag list to Tag object
-                Dim tagList As IList(Of Tag) = New List(Of Tag)()
+                'Handles new and existing tag count / usage
+
                 For Each item In model.Tags
                     Dim tag As Tag = New Tag()
+                    Dim formTag As FormTag = New FormTag()
                     'Checks if the tag is defined in the database
                     Dim tagCheck As Tag = db.Tag.Where(Function(t) t.Name = item).FirstOrDefault()
                     If tagCheck Is Nothing Then
                         tag.Name = item
                         tag.Usage = 1
-                        tagList.Add(tag)
+
+                        formTag.Tag = tag
+
+                        db.Tag.Add(tag)
+
                     Else
                         tagCheck.Usage = tagCheck.Usage + 1
+
+                        formTag.Tag = tagCheck
+
                         db.Entry(tagCheck).State = EntityState.Modified
                     End If
+                    currentFormTags.Add(formTag)
                 Next
 
                 form.User = creator
                 form.Category = category
                 'I dont know if this can be nullable (if yes then this is good)
-                form.Tags = tagList
+                'form.Tags = tagList
+                form.FormTags = currentFormTags
 
                 db.Form.Add(form)
                 db.SaveChanges()
@@ -88,9 +116,9 @@ Namespace Controllers
             viewModel.Title = form.Title
             viewModel.Description = form.Description
             viewModel.CategoryID = form.CategoryID
-            For Each tag In form.Tags
-                tagList.Add(tag.Name)
-            Next
+            'For Each tag In form.Tags
+            '    tagList.Add(tag.Name)
+            'Next
             viewModel.Tags = tagList
             viewModel.Questions = form.Questions
 
@@ -112,7 +140,7 @@ Namespace Controllers
                 form.Title = model.Title
                 form.Description = model.Description
                 form.CategoryID = model.CategoryID
-                form.Tags = userTools.getCheckedTagList(model, db)
+                'form.Tags = userTools.getCheckedTagList(model, db)
                 form.Questions = model.Questions
 
                 db.Entry(form).State = EntityState.Modified

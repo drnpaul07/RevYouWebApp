@@ -10,6 +10,7 @@ Namespace Models.Base
 
         'Collection Models
         Public Overridable Property Forms As ICollection(Of Form)
+        Public Overridable Property UserTags As IList(Of UserTag)
         'Profile Picture
         'Public Property ImageContent As Byte()
         'Public Property ImageType As String
@@ -17,16 +18,14 @@ Namespace Models.Base
     End Class
 
 
-    'Public Class UserTag
-    '    Public Property UserTagID As Integer
+    Public Class UserTag
+        Public Property UserTagID As Integer
 
+        Public Property UserDataID As Integer
+        Public Overridable Property UserData As UserData
 
-
-    '    Public Property UserDataID As Integer
-    '    Public Overridable Property UserData As UserData
-
-    '    Public Property TagID As Integer
-    '    Public Overridable Property Tag As Tag
-    'End Class
+        Public Property TagID As Integer
+        Public Overridable Property Tag As Tag
+    End Class
 End Namespace
 
