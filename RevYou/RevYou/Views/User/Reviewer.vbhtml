@@ -18,6 +18,10 @@ End Code
         .icon-container {
             flex-basis: calc(100% * (1/3));
         }
+
+        .pager{
+            margin-top: 30px !important
+        }
     </style>
 End Section
 
@@ -26,18 +30,14 @@ End Section
 <script src="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.min.js")"></script>
 <Script src="@Url.Content("~/Content/RevYou/js/rev-popup.js")"></Script>
 <script>
-    $(function () {
-        $('#reviewer-table').DataTable({
-            responsive: true
-        });
-        
+    $(function () {     
+        document.getElementById('bottom-element').scrollIntoView()
     })
 
     function deleteForm(formID) {
         var form = $(formID)
         swal({
-            title: "Delete",
-            text: "Are you sure?",
+            title: "REMOVE FORM",
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
@@ -51,8 +51,7 @@ End Section
    				    form.submit();
    			    } else {
    				    swal({
-   					    title: "Aborted",
-   					    text: "Action was not saved",
+   					    title: "ABORTED",
    					    type: "error",
    					    showConfirmButton: true,
    					    closeOnConfirm: false
@@ -60,9 +59,12 @@ End Section
    			    }
    		    });
     }
+    function backToTop() {
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
+    }
 </script>
 End Section
-
+<div id="top-element"></div>
 <ol class="breadcrumb pull-right">
     <li>
         <a href="/User/CreateForm">
@@ -98,8 +100,9 @@ End Section
                 </ul>
             </div>
             <div class="body">
+                
                 @If ViewBag.UserForms.count() = 0 Then
-                    @<h1>THIS IS EMPTY</h1>
+                    @<h1>You dont have any forms yet</h1>
                 End If
                 @For Each form In ViewBag.UserForms
 
@@ -199,14 +202,21 @@ End Section
                     @<!--END OF POST-->
                     Next
                     @If ViewBag.IsAllDisplayed Then
-                        @<h1>All is Displayed</h1>
+                        @<ul Class="pager">
+                            <li> <a href="javascript:backToTop()" Class="waves-effect">Back to top</a></li>
+                        </ul>
                     Else
                         @Using Html.BeginForm("Reviewer", "User", FormMethod.Get, New With {.role = "form", .id = "showmore_form"})
                             @<input name="viewMode" id="viewMode" type="hidden" value="offset" />
                             @<input name="currentDisplayed" id="currentDisplayed" type="hidden" value="@ViewBag.UserForms.count()" />
-                            @<a href="javascript:document.getElementById('showmore_form').submit()">Show more</a>
+                            @*@<a href="javascript:document.getElementById('showmore_form').submit()">Show more</a>*@
+
+                            @<ul Class="pager">
+                                <li> <a href = "javascript:document.getElementById('showmore_form').submit()" Class="waves-effect">-- Show More --</a></li>
+                            </ul>
                         End Using
                     End If
+                <div id="bottom-element"></div>
             </div>
         </div>
     </div>

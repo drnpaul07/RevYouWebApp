@@ -226,6 +226,8 @@ End Using
                             )
                             x++;
                             arrangeModelBinding();
+                            var pixelFromTop = $(document).height();
+                            $('html,body').animate({ scrollTop: pixelFromTop }, 'slow');
                         }
                     })
 
