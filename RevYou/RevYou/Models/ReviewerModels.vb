@@ -9,6 +9,7 @@ Namespace Models.Reviewer
         Public Property Title As String
         Public Property Description As String
         Public Property DateCreated As DateTime
+        Public Property IsPosted As Boolean
 
         'This is the connected DbSet for this DbSet.
         Public Overridable Property Questions As IList(Of Question)

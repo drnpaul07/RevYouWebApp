@@ -4,6 +4,10 @@ End Code
 @section local_styles
 <!-- Sweetalert Css -->
 <link href="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.css")" rel="stylesheet" />
+ <!-- Waves Effect Css -->
+<link href="@Url.Content("~/Content/Template/plugins/node-waves/waves.css")" rel="stylesheet" />
+<!-- Animation Css -->
+<link href="@Url.Content("~/Content/Template/plugins/animate-css/animate.css")" rel="stylesheet" />
     <style>
         #reviewer-container{
             min-height: 75vh  !important;
@@ -22,17 +26,64 @@ End Code
         .pager{
             margin-top: 30px !important
         }
+        #create-form-container{
+              width: 100%;
+              /* Firefox */
+              display: -moz-box;
+              -moz-box-pack: center;
+              -moz-box-align: center;
+              /* Safari and Chrome */
+              display: -webkit-box;
+              -webkit-box-pack: center;
+              -webkit-box-align: center;
+              /* W3C */
+              display: box;
+              box-pack: center;
+              box-align: center;
+              
+
+             
+        }
+        #create-form{
+            width:70%;
+            margin-top: 20vh;
+        }
+        .result-count {
+           position:absolute;
+           bottom:10px;
+           right:20px;
+           font-size:10pt
+          
+        }
+
     </style>
 End Section
 
 @section local_scripts
 <!-- SweetAlert Plugin Js -->
 <script src="@Url.Content("~/Content/Template/plugins/sweetalert/sweetalert.min.js")"></script>
+<!-- Waves Effect Plugin Js -->
+<script src="@Url.Content("~/Content/Template/plugins/node-waves/waves.js")"></script>
 <Script src="@Url.Content("~/Content/RevYou/js/rev-popup.js")"></Script>
 <script>
-    $(function () {     
+    $(function () {
         document.getElementById('bottom-element').scrollIntoView()
-    })
+        
+
+        if (@ViewBag.UserForms.count() <= 0) {
+            swal({
+                title: "MESSAGE",
+                text:"Form collection is Empty"
+            })
+        }
+    });
+
+    function showAll(){
+        alert("HATDOG")
+        $("#viewMode").value= "all";
+
+        $("#showmore_form").submit();
+    }
 
     function deleteForm(formID) {
         var form = $(formID)
@@ -67,7 +118,7 @@ End Section
 <div id="top-element"></div>
 <ol class="breadcrumb pull-right">
     <li>
-        <a href="/User/CreateForm">
+        <a href="javascript:void(0)">
             <i class="material-icons">home</i> User
         </a>
     </li>
@@ -92,9 +143,8 @@ End Section
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
+                            <li><a href="/User/CreateForm">Create Form</a></li>
+                            <li><a href="javascript:showAll();">Show All</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -102,7 +152,21 @@ End Section
             <div class="body">
                 
                 @If ViewBag.UserForms.count() = 0 Then
-                    @<h1>You dont have any forms yet</h1>
+                    @<div id="create-form-container">
+                         <div id ="create-form">
+                             <div class="info-box-3 bg-light-blue hover-zoom-effect" style="cursor:pointer" onclick="location.href = '/User/CreateForm';">
+                                 <div class="icon">
+                                     <i class="material-icons">library_books</i>
+                                 </div>
+                                 <div class="content">
+                                     <div class="text">Click to add a new form</div>
+                                     <div class="number">CREATE FORM</div>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+
+
                 End If
                 @For Each form In ViewBag.UserForms
 
@@ -164,7 +228,7 @@ End Section
 
                                 <li>
                                     
-                                    @Using Html.BeginForm(submitLink, "User", FormMethod.Post, New With {.role = "form", .id = formId})
+                                    @Using Html.BeginForm(submitLink, "User", FormMethod.Post, New With {.role = "form", .id = formID})
                                         @Html.AntiForgeryToken()
                                         @<a href="javascript:deleteForm(@formId)">
                                             <i class="material-icons">delete</i>
@@ -201,26 +265,34 @@ End Section
                     </div>
                     @<!--END OF POST-->
                     Next
-                    @If ViewBag.IsAllDisplayed Then
-                        @<ul Class="pager">
-                            <li> <a href="javascript:backToTop()" Class="waves-effect">Back to top</a></li>
-                        </ul>
-                    Else
-                        @Using Html.BeginForm("Reviewer", "User", FormMethod.Get, New With {.role = "form", .id = "showmore_form"})
-                            @<input name="viewMode" id="viewMode" type="hidden" value="offset" />
-                            @<input name="currentDisplayed" id="currentDisplayed" type="hidden" value="@ViewBag.UserForms.count()" />
-                            @*@<a href="javascript:document.getElementById('showmore_form').submit()">Show more</a>*@
+                    @If ViewBag.UserForms.count() > 0 Then
 
-                            @<ul Class="pager">
-                                <li> <a href = "javascript:document.getElementById('showmore_form').submit()" Class="waves-effect">-- Show More --</a></li>
-                            </ul>
-                        End Using
-                    End If
-                <div id="bottom-element"></div>
+                        @If ViewBag.IsAllDisplayed Then
+                            If ViewBag.UserForms.count() > 2 Then
+                                @<ul Class="pager">
+                                    <li> <a href="javascript:backToTop()" Class="waves-effect">Back to top</a></li>
+                                </ul>
+                            End If
+                        Else
+                            @Using Html.BeginForm("Reviewer", "User", FormMethod.Get, New With {.role = "form", .id = "showmore_form"})
+                                @<input name="viewMode" id="viewMode" type="hidden" value="offset" />
+                                @<input name="currentDisplayed" id="currentDisplayed" type="hidden" value="@ViewBag.UserForms.count()" />
+                                @*@<a href="javascript:document.getElementById('showmore_form').submit()">Show more</a>*@
+
+                                @<ul Class="pager">
+                                    <li> <a href="javascript:document.getElementById('showmore_form').submit()" Class="waves-effect">Show More</a></li>
+                                </ul>
+                            End Using
+                        End If
+
+                    End If  
+
+                
+                <div id="bottom-element" class="pull-right result-count">
+                    Showing @ViewBag.ViewedCount out of @ViewBag.TotalCount Forms
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!-- #END# Tabs With Icon Title -->
-
-

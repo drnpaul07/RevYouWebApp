@@ -126,12 +126,32 @@ End Section
                     <div Class="body">
                         <div Class="row clearfix">
                             <div Class="col-lg-12">
-                                <div Class="form-group">
-                                    <div Class="form-line">
-                                        @*@Html.TextBoxFor(Function(m) m.Questions(0).Statement, New With {.class = "form-control", .placeholder = "Question"})*@
-                                        <input class="form-control question-field" id="Questions_0__Statement" name="Questions[0].Statement" placeholder="Question" type="text" data-index="0"/>
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div Class="form-group">
+                                            <div Class="form-line">
+                                                @*@Html.TextBoxFor(Function(m) m.Questions(0).Statement, New With {.class = "form-control", .placeholder = "Question"})*@
+                                                <input class="form-control question-field" id="Questions_0__Statement" name="Questions[0].Statement" placeholder="Question" type="text" data-index="0" />
+                                            </div>
+                                        </div>
                                     </div>
+                                    
+
+                                   <div class="col-lg-3">
+                                       <div class="form-group">
+                                           <select id="questionType" name="questionType" class="form-control show-tick" required>
+                                                <option value="SH-ANS" selected>
+                                                    Short Answer
+                                                </option>
+                                                <option value="MUL-CH">
+                                                    Multiple Choice
+                                                </option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                    
                                 </div>
+
                                 <div Class="form-group">
                                     <div Class="form-line">
                                         @*@Html.TextBoxFor(Function(m) m.Questions(0).Answer, New With {.class = "form-control", .placeholder = "Answer"})*@
@@ -180,6 +200,7 @@ End Using
 <script>
     $(function () {
         $('#CategoryID').selectpicker();
+        $('#questionType').selectpicker();
 
         arrangeModelBinding(); //arranging model binding
         var max_questions = 4; //maximum input boxes allowed is 5

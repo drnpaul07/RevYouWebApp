@@ -25,6 +25,7 @@ Namespace Migrations.RevConf
                         .Title = c.String(),
                         .Description = c.String(),
                         .DateCreated = c.DateTime(nullable := False),
+                        .IsPosted = c.Boolean(nullable := False),
                         .UserDataID = c.Int(nullable := False),
                         .CategoryID = c.Int(nullable := False)
                     }) _

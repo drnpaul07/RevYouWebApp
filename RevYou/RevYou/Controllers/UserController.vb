@@ -27,12 +27,20 @@ Namespace Controllers
             Dim userForms As IList(Of Form) = db.Form.Where(Function(m) m.UserDataID =
                                                   db.UserData.Where(Function(n) n.Username = currentUsername) _
                                                   .FirstOrDefault.UserDataID).ToList
-
-            If viewMode = "offset" Then
-                currentDisplayed = currentDisplayed + 5
-            ElseIf viewMode = "all" Then
+            If userForms.Count > 1 Then
+                If viewMode = "offset" Then
+                    If userForms.Count >= 7 Then
+                        currentDisplayed = currentDisplayed + 5
+                    Else
+                        currentDisplayed = userForms.Count
+                    End If
+                ElseIf viewMode = "all" Then
+                        currentDisplayed = userForms.Count
+                End If
+            Else
                 currentDisplayed = userForms.Count
             End If
+
 
             ViewBag.UserForms = userForms.OrderByDescending(Function(m) m.DateCreated).Take(currentDisplayed).ToList
             ViewBag.UserData = db.UserData.Where(Function(m) m.Username = currentUsername).FirstOrDefault
@@ -42,6 +50,9 @@ Namespace Controllers
             Else
                 ViewBag.IsAllDisplayed = False
             End If
+
+            ViewBag.ViewedCount = currentDisplayed
+            ViewBag.TotalCount = userForms.Count()
 
             Return View()
         End Function
@@ -99,6 +110,7 @@ Namespace Controllers
                 'I dont know if this can be nullable (if yes then this is good)
                 'form.Tags = tagList
                 form.FormTags = currentFormTags
+                form.IsPosted = False
 
                 db.Form.Add(form)
                 db.SaveChanges()
