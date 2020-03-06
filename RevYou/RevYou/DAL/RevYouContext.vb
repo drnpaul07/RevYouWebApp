@@ -17,9 +17,11 @@ Namespace DAL
         Public Property Category As DbSet(Of Category)
         Public Property Tag As DbSet(Of Tag)
 
+
         'has Many-To-Many-Relationship
         Public Property UserTag As DbSet(Of UserTag)
         Public Property FormTag As DbSet(Of FormTag)
+        Public Property Choice As DbSet(Of Choice)
 
         'Pluralizer ( on DB ) can be enabled by deleting this overriding sub
         Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)

@@ -4,6 +4,10 @@ Imports Microsoft.AspNet.Identity.EntityFramework
 Imports RevYou.Models.Base
 
 Namespace Models.Reviewer
+    Public Enum QuestionType
+        multiple_choice
+        short_answer
+    End Enum
     Public Class Form
         Public Property FormID As Integer
         Public Property Title As String
@@ -29,16 +33,31 @@ Namespace Models.Reviewer
         Public Property QuestionID As Integer
         Public Property Index As String
         Public Property Statement As String
-        Public Property Answer As String
+        Public Property Type As String
+
         Public Property FormID As Integer
+
+        Public Property Answer As String
 
         'If there is an Image that needs to be viewed
         'Public Property ImageData As Byte()
         'Public Property ImageType As String
         'Public Property ImageSize As Integer
 
+        'Related DBSets
+        Public Overridable Property Choices As IList(Of Choice)
+
         'Parent Form
         Public Overridable Property Form As Form
+    End Class
+
+    Public Class Choice
+        Public Property ChoiceID As Integer
+        Public Property Item As String
+        Public Property isAnswer As Boolean
+
+        Public Property QuestionID As Integer
+
     End Class
 
     Public Class Category
