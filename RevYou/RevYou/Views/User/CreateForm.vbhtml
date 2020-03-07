@@ -145,7 +145,7 @@ End Section
                                    <div class="col-lg-3">
                                        <div class="form-group">
                                            <input type="hidden" class="question-type-field" id="Questions_0__Type" name="Questions[0].Type" value="short_answer"/>
-                                           <select class="form-control show-tick question-type-select" onchange="typeChanged(this)" required>
+                                           <select  class="form-control show-tick question-type-select" onchange="typeChanged(this)" required>
                                                 <option value="short_answer" selected>
                                                     Short Answer
                                                 </option>
@@ -158,18 +158,17 @@ End Section
                                 </div>
                                 <div id="answerContainer" class="answer-container">
                                     <!--SHORT ANSWER-->
-                                    <!--
                                     <div Class="form-group">
                                         <div Class="form-line">
                                             @*@Html.TextBoxFor(Function(m) m.Questions(0).Answer, New With {.class = "form-control", .placeholder = "Answer"})*@
                                             <input class="form-control answer-field" id="Questions_0__Answer" name="Questions[0].Answer" placeholder="Answer" type="text" data-index="0" />
                                             <div Class="help-info">Answer strings are Not case sensitive</div>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <!--MULTIPLE CHOICE-->
-                                    <div class="row clearfix choices-wrapper">
-                                        <div class="col-md-12">
-                                            <div class="input-group input-group-sm choice-input-group">
+                                    @*<div class="row clearfix choices-wrapper">
+                                        <div class="col-md-12" style="margin-bottom:0px;">
+                                            <div class="input-group input-group-sm choice-input-group" style="margin-bottom:0px;">
                                                 <span class="input-group-addon">
                                                     <input type="checkbox" id="Questions_0__Choices_0__Item" name="Questions[0].Choices[0].Item" class="chk-col-green isAnswer-field"/>
                                                     <label for="Questions_0__Choices_0__Item"></label>
@@ -177,19 +176,18 @@ End Section
                                                 <div class="form-line">
                                                     <input type="text" class="form-control choice-field">
                                                 </div>
-                                                @*<span class="input-group-addon">
-                                                    <a href="javascript:void(0);" class="choice-action-remove">
-                                                        <i class="material-icons col-red">delete_forever</i>
-                                                    </a>
-                                                </span>*@
-                                                @*<span class="input-group-addon"> 
-                                                    <a href="javascript:void(0);" class="choice-action add">
-                                                        <i class="material-icons col-green">add_circle_outline</i>
-                                                    </a>
-                                                </span>*@
+                                                <span class="input-group-addon remove-choice-span" onclick="choiceAction(this,2)" style="cursor:pointer;">
+                                                     <i class="material-icons col-red">delete_forever</i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row clearfix" id="add-choice-wrapper">
+                                        <span data-count="1" class="pull-right p-r-15" style="cursor:pointer;" onclick="choiceAction(this,1)">
+                                            <small>Add another Choice</small>
+                                            <i class="material-icons font-18 col-green" style="position:relative;top:5px;">add_circle</i>
+                                        </span>
+                                    </div>*@
                                 </div>
                                 <div Class="align-center">
                                     <Button type = "button" Class="btn btn-danger btn-circle waves-effect waves-circle waves-float remove-question-btn">
@@ -236,12 +234,6 @@ End Using
         $('#CategoryID').selectpicker();
         $('.question-type-select').selectpicker();
 
-        //IMMITATE RADIO GROUP FOR CHECKBOXES
-        $('input[type="checkbox"]').on('change', function () {
-            alert("CHANGED");
-            $('input[type="checkbox"]').not(this).prop('checked', false);
-        });
-
         arrangeModelBinding(); //arranging model binding
         var max_questions = 4; //maximum input boxes allowed is 5
         var wrapper = $("#questions-row"); //Fields wrapper
@@ -274,7 +266,7 @@ End Using
                                                         '</div>' +
                                                         '<div class="col-lg-3">' +
                                                             '<div class="form-group">' +
-                                                                '<input type="hidden" class="question-type-field"/>' +
+                                                                '<input type="hidden" class="question-type-field" value="short_answer" />' +
                                                                 '<select class="form-control show-tick question-type-select" onchange="typeChanged(this)" required>' +
                                                                     '<option value="short_answer" selected>' +
                                                                         'Short Answer' +
@@ -323,46 +315,26 @@ End Using
             }
 
         });
-        $(answerContainer).on("click", ".choice-action-remove", function (e){
-            e.preventDefault();
-            $(this).parent().parent().parent().remove();
-            arrangeModelBinding();
-        });
     });
 
     function arrangeModelBinding() {
+        var shortAnswerFields
+        var choicesInputGroup
         $('.question-field').each(function (i, obj) {
-            var choiceInputGroup = $(this).parent().parent().parent().parent().parent().find(".choice-input-group");
-            
-            var removeChoice = $('<span class="input-group-addon">' +
-                                    '<a href="javascript:void(0);" class="choice-action-remove">' +
-                                        '<i class="material-icons col-red">delete_forever</i>' +
-                                    '</a>' +
-                                '</span>');
-            var addChoice = $('<span class="input-group-addon add-choice-span" style="padding-right:0px">' +
-                                '<a id="addChoiceBtn" href="javascript:addChoice();" class="choice-action add" data-count=' + (choiceInputGroup.length - 1) + '>' +
-                                    '<i class="material-icons col-green">add_circle_outline</i>' +
-                                '</a>' +
-                            '</span>');
-            
             //For the Question Field
             obj.id = "Questions_"+ (i) +"__Statement"
             obj.name = "Questions[" + (i) + "].Statement"
-
-            choiceInputGroup.find('.add-choice-span').remove();
-            choiceInputGroup.each(function (i, obj) {
-                if(i === (choiceInputGroup.length - 1)){
-                    addChoice.appendTo(obj);
-                } else {
-                    removeChoice.appendTo(obj);
-                }
+            
+            //Arragning short answers by the QUESTION OBJECT they are in.
+            shortAnswerFields = $(this).parent().parent().parent().parent().parent().find(".answer-field")
+            shortAnswerFields.each(function (j, obj) {
+                obj.id = "Questions_" + (i) + "__Answer"
+                obj.name = "Questions[" + (i) + "].Answer"
             });
-        });
-        $('.answer-field').each(function (i, obj) {
-            //For the Question Field
-            obj.id = "Questions_" + (i) + "__Answer"
-            obj.name = "Questions[" + (i) + "].Answer"
-           
+
+            choicesInputGroup = $(this).parent().parent().parent().parent().parent().find(".choice-input-group");
+            arrangeChoiceModelBinding(choicesInputGroup, i);
+            
         });
         $('.question-type-field').each(function (i, obj) {
             //For the Question Field
@@ -371,10 +343,62 @@ End Using
             
         });
         $('.question-type-select').selectpicker();
-        
+    }
+
+    function arrangeChoiceModelBinding(inputGroup,ctr) {
+        //alert(inputGroup.length)
+        //$(inputGroup).each(function (j, iGroup) {
+        //    iGroup.id = "HATDOG";
+        //})
+
+        //arranging checkboxes ( isAnswer )
+        inputGroup.find(".isAnswer-field").each(function (i, obj) {
+            obj.id = "Questions_" + ctr + "__Choices_" + i + "__isAnswer"
+            obj.name = "Questions[" + ctr + "].Choices[" + i + "].isAnswer"
+        });
+        inputGroup.find(".isAnswer-checkbox").each(function (i, obj) {
+            obj.id = "Questions[" + ctr + "]Checkboxes[" + i + "]"
+        });
+        inputGroup.find("label").each(function (j, label) {
+            label.setAttribute("for", "Questions[" + ctr + "]Checkboxes[" + j + "]");
+        });
+
+        //arranging Choices item field
+        inputGroup.find(".choice-field").each(function (k, obj) {
+            obj.id = "Questions_" + ctr + "__Choices_" + k + "__Item"
+            obj.name = "Questions[" + ctr + "].Choices[" + k + "].Item"
+        });
+    }
+
+    function checkBoxClicked(element) {
+        //IMMITATE RADIO GROUP FOR CHECKBOXES
+        //alert($(element).parent().parent().parent().parent().find('input[type="checkbox"]').length);
+        var checkboxes = $(element).parent().parent().parent().parent().find('input[type="checkbox"]');
+        checkboxes.each(function (i, cb) {
+            if (cb === element) {
+                cb.checked = true;
+                //$(element).prev().val(true);
+            } else {
+                cb.checked = false;
+                //$(element).prev().val(false);
+            }
+
+            if ($(this).is(":checked")) {
+                //alert("Checkbox is checked.");
+                $(this).prev().val(true)
+            } else {
+                //alert("Checkbox is NOT checked.");
+                $(this).prev().val(false)
+            }
+        });
+
+        //TO apply the TRUE FALSE value of the CHECKBOXES
+        arrangeModelBinding();
     }
     function typeChanged(element) {
-        $(element).parent().parent().children("input").first().val($(element).val())
+        //$(element).parent().parent().children("input").first().val($(element).val())
+        var memberId = $(element).data("memberId");
+        var memberName = $(element).data("memberName");
         var answerContainer = $(element).parent().parent().parent().parent().parent().find(".answer-container");
         
         if ($(element).val() === "short_answer") {
@@ -388,39 +412,113 @@ End Using
                         '</div>' +
                     '</div>'
                 )
+            $(element).parent().parent().find(".question-type-field").val("short_answer");
         } else if ($(element).val() === "multiple_choice") {
             //alert("MULTIPLE CHOICE")
+            
             answerContainer.children().remove();
             answerContainer.append(
-                   "<h3>HATDOG</h3>"
-               )
+                   '<div class="row clearfix choices-wrapper">' +
+                        '<div class="col-md-12" style="margin-bottom:0px;">' +
+                            '<div class="input-group input-group-sm choice-input-group" style="margin-bottom:0px;">' +
+                                '<span class="input-group-addon">' +
+                                    '<input type="hidden" class="isAnswer-field" value="false" />' +
+                                    '<input type="checkbox" onclick="checkBoxClicked(this)" class="chk-col-green isAnswer-checkbox"/>' +
+                                    '<label class="isAnswer-checkbox-label"></label>' +
+                                '</span>' +
+                                '<div class="form-line">' +
+                                    '<input type="text" class="form-control choice-field">' +
+                                '</div>' +
+                                '<span class="input-group-addon remove-choice-span" onclick="choiceAction(this,2)" style="cursor:pointer;">' +
+                                        '<i class="material-icons col-red">delete_forever</i>' +
+                                '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="row clearfix" id="add-choice-wrapper">' +
+                        '<span data-count="1" class="pull-right p-r-15 add-choice-button" style="cursor:pointer;" onclick="choiceAction(this,1)">' +
+                            '<small>Add another Choice</small>' +
+                            '<i class="material-icons font-18 col-green" style="position:relative;top:5px;">add_circle</i>' +
+                        '</span>' +
+                    '</div>'
+               );
+            $(element).parent().parent().find(".question-type-field").val("multiple_choice");
         }
         arrangeModelBinding();
     }
-    function addChoice() {
-        var maxChoices = 5;
-        var count = $("#addChoiceBtn").data("count");
-        var choicesWrapper = $("#addChoiceBtn").closest(".choices-wrapper");
-
-        if (count <= 5) {
-            var html = $('<div class="col-md-12">' +
-                   '<div class="input-group input-group-sm choice-input-group">' +
-                       '<span class="input-group-addon">' +
-                           '<input type="checkbox" id="Questions_0__Choices_0__Item" name="Questions[0].Choices[0].Item" class="chk-col-green isAnswer-field"/>' +
-                           '<label for="Questions_0__Choices_0__Item"></label>' +
-                       '</span>' +
-                       '<div class="form-line">' +
-                           '<input type="text" class="form-control choice-field">' +
-                       '</div>' +
-                   '</div>' +
-               '</div>');
-            html.appendTo($(choicesWrapper));
-            arrangeModelBinding();
-        } else {
-            swal("Cannot add another choice!");
-        }
-       
+    function choiceAction(element, mode) {
+        var maxChoices = 4;
+        var choicesWrapper = $(element).parent().parent().find(".choices-wrapper");
         
+        if (mode === 1) {
+            //do the additions here
+            var count = parseInt($(element).data("count"));
+            if (count <= maxChoices) {
+                var choiceNode = $(
+                    '<div class="col-md-12" style="margin-bottom:0px;">' +
+                        '<div class="input-group input-group-sm choice-input-group" style="margin-bottom:0px;">' +
+                             '<span class="input-group-addon">' +
+                                    '<input type="hidden" class="isAnswer-field" value="false" />' +
+                                    '<input type="checkbox" onclick="checkBoxClicked(this)" class="chk-col-green isAnswer-checkbox"/>' +
+                                    '<label class="isAnswer-checkbox-label"></label>' +
+                                '</span>' +
+                            '<div class="form-line">' +
+                                '<input type="text" class="form-control choice-field">' +
+                            '</div>' +
+                            '<span class="input-group-addon remove-choice-span" onclick="choiceAction(this,2)" style="cursor:pointer;">' +
+                                    '<i class="material-icons col-red">delete_forever</i>' +
+                            '</span>' +
+                        '</div>' +
+                    '</div>'
+                    );
+                choiceNode.prependTo($(choicesWrapper));
+                $(element).data("count", count+1);
+            } else {
+                swal("MAXIMUM CHOICES REACHED");
+            }
+        } else {
+            var addChoiceBtn = $(element).parent().parent().parent().parent().find(".add-choice-button");
+            count = parseInt(addChoiceBtn.data("count"));
+            if (count > 1) {
+                $(element).parent().remove();
+                addChoiceBtn.data("count", count - 1);
+            } else {
+                swal("CANNOT REMOVE LAST ENTRY");
+            }
+            
+        }
+        arrangeModelBinding();
+    }
+    function choiceActionViewBuilder() {
+        $('.question-field').each(function (i, obj) {
+            //var choiceInputGroup = $(this).parent().parent().parent().parent().parent().find(".choice-input-group");
+            var choiceInputGroup = $(this)
+
+            var removeChoice = $('<span class="input-group-addon remove-choice-span">' +
+                                    '<a onclick="choiceAction(this,2)" class="choice-action-remove">' +
+                                        '<i class="material-icons col-red">delete_forever</i>' +
+                                    '</a>' +
+                                '</span>');
+            var addChoice = $('<span class="input-group-addon add-choice-span">' +
+                                '<a id="addChoiceBtn" onclick="choiceAction(this,1)" class="choice-action add" data-count=' + (choiceInputGroup.length - 1) + '>' +
+                                    '<i class="material-icons col-green">add_circle_outline</i>' +
+                                '</a>' +
+                            '</span>');
+
+            alert($(choiceInputGroup).className)
+            choiceInputGroup.find('.add-choice-span').remove();
+            choiceInputGroup.find(".remove-choice-span").each(function (j, remSpan) {
+                remSpan.remove();
+            });
+
+            choiceInputGroup.each(function (k, iGroup) {
+                if (k === (choiceInputGroup.length - 1)) {
+                    addChoice.appendTo(iGroup);
+                } else if(k < (choiceInputGroup.length - 1)) {
+                    removeChoice.appendTo(iGroup);
+                }
+            });
+        });
     }
 </script>
 End Section
