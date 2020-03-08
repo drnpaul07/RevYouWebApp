@@ -132,22 +132,91 @@ End Section
                     Dim qIndex As Integer = 0
                 End Code
                 @For Each question In Model.Questions
-                    qIndex = qIndex + 1
                     @<div Class="col-lg-12 question-col">
+                        <input type="hidden" id="Questions_{@qIndex}__QuestionID" name="Questions[{@qIndex}].QuestionID" class="question-id-field" value="@question.QuestionID" />
                         <div Class="card q-card">
                             <div Class="body">
                                 <div Class="row clearfix">
                                     <div Class="col-lg-12">
-                                        <div Class="form-group">
-                                            <div Class="form-line">
-                                                <input class="form-control question-field" id="Questions_{@qIndex}__Statement" name="Questions[{@qIndex}].Statement" value = "@question.Statement" placeholder="Question" type="text" data-index="0" />
+                                        <div class="row">
+                                            <div class="col-lg-9">
+                                                <div Class="form-group">
+                                                    <div Class="form-line">
+                                                        <input class="form-control question-field" id="Questions_{@qIndex}__Statement" name="Questions[{@qIndex}].Statement" value = "@question.Statement" placeholder="Question" type="text" data-index="0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--QUESTION TYPE-->
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <input type="hidden" class="question-type-field" id="Questions_0__Type" name="Questions[0].Type" value="@question.Type" />
+                                                    <select class="form-control show-tick question-type-select" onchange="typeChanged(this)" required>
+                                                        @If question.Type = "short_answer" Then
+                                                            @<option value = "short_answer" selected>
+                                                                Short Answer
+                                                            </option>
+                                                            @<option value = "multiple_choice" >
+                                                                Multiple Choice
+                                                            </option>
+                                                        ElseIf question.Type = "multiple_choice" Then
+                                                            @<option value = "short_answer">
+                                                                Short Answer
+                                                            </option>
+                                                            @<option value = "multiple_choice" selected>
+                                                                Multiple Choice
+                                                            </option>
+                                                        End If
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div Class="form-group">
-                                            <div Class="form-line">
-                                                <input class="form-control answer-field" id="Questions_{@qIndex}__Answer" name="Questions[{@qIndex}].Answer" value = "@question.Answer" placeholder="Answer" type="text" data-index="0" />
-                                                <div Class="help-info">Answer strings are Not case sensitive</div>
+                                        <div id = "answerContainer" Class="answer-container">
+                                        @If question.Type = "short_answer" Then
+                                            @<!--SHORT ANSWER-->
+                                            @<div Class="form-group">
+                                                <div Class="form-line">
+                                                    <input Class="form-control answer-field" id="Questions_{@qIndex}__Answer" name="Questions[{@qIndex}].Answer" value = "@question.Answer" placeholder="Answer" type="text" data-index="0" />
+                                                    <div Class="help-info">Answer strings are Not case sensitive</div>
+                                                </div>
                                             </div>
+                                        ElseIf question.Type = "multiple_choice" Then
+                                            
+                                            @Code
+                                                Dim choiceIndex As Integer = 0
+                                            End Code
+                                                @<!--MULTIPLE CHOICE-->
+                                                @<div class="row clearfix choices-wrapper">
+                                                @For Each choice In question.Choices
+                                                    @<div class="col-md-12" style="margin-bottom:0px;">
+                                                        <div class="input-group input-group-sm choice-input-group" style="margin-bottom:0px;">
+                                                            <span class="input-group-addon">
+                                                                @If choice.isAnswer = True Then
+                                                                    @<input type = "hidden" Class="isAnswer-field" value="true" />
+                                                                    @<input type = "checkbox" onclick="checkBoxClicked(this)" Class="chk-col-green isAnswer-checkbox" checked/>
+                                                                ElseIf choice.isAnswer = False Then
+                                                                    @<input type = "hidden" Class="isAnswer-field" value="false" />
+                                                                    @<input type = "checkbox" onclick="checkBoxClicked(this)" Class="chk-col-green isAnswer-checkbox"/>
+                                                                End If
+                                                                <Label Class="isAnswer-checkbox-label"></label>
+                                                            </span>
+                                                            <div Class="form-line">
+                                                                <input type = "text" Class="form-control choice-field" value="@choice.Item">
+                                                            </div>
+                                                            <span Class="input-group-addon remove-choice-span" onclick="choiceAction(this,2)" style="cursor:pointer;">
+                                                                <i Class="material-icons col-red">delete_forever</i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    choiceIndex = choiceIndex + 1
+                                                Next
+                                                </div>
+                                                @<div class="row clearfix" id="add-choice-wrapper">
+                                                    <span data-count="@question.Choices.Count" class="pull-right p-r-15 add-choice-button" style="cursor:pointer;" onclick="choiceAction(this,1)">
+                                                        <small>Add another Choice</small>
+                                                        <i class="material-icons font-18 col-green" style="position:relative;top:5px;">add_circle</i>
+                                                    </span>
+                                                </div>
+                                                End If
                                         </div>
                                         <div Class="align-center">
                                             <Button type="button" Class="btn btn-danger btn-circle waves-effect waves-circle waves-float remove-question-btn">
@@ -159,7 +228,8 @@ End Section
                             </div>
                         </div>
                     </div>
-                Next
+                                                    qIndex = qIndex + 1
+                                                Next
             </div>
         </div>
         <div Class="col-lg-12 align-center p-b-10">
@@ -187,17 +257,19 @@ End Section
     <!-- Multi Select Plugin Js -->
     <script src="@Url.Content("~/Content/Template/plugins/multi-select/js/jquery.multi-select.js")"></script>
 
-    <script>
+<script>
     $(function () {
         $('#CategoryID').selectpicker();
+        $('.question-type-select').selectpicker();
 
         arrangeModelBinding(); //arranging model binding
         var max_questions = 4; //maximum input boxes allowed is 5
         var wrapper = $("#questions-row"); //Fields wrapper
+        var answerContainer = $("#answerContainer"); //Answer Container
         var add_button = $("#add-question-btn"); //Add button ID
-
         var x = $('.question-field').length; //initlal text box count
-
+        var removedIndex = []
+        var removedCount = 0
         $(add_button).click(
                     function (e) {
                         //on add input button click
@@ -212,15 +284,34 @@ End Section
                                         '<div class="body">' +
                                             '<div class="row clearfix">' +
                                                 '<div class="col-lg-12">' +
-                                                    '<div class="form-group">' +
-                                                        '<div class="form-line">' +
-                                                            '<input class="form-control question-field" placeholder="Question" type="text" value="" />' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-lg-9">' +
+                                                            '<div class="form-group">' +
+                                                                '<div class="form-line">' +
+                                                                    '<input class="form-control question-field" placeholder="Question" type="text" value="" />' +
+                                                                '</div>' +
+                                                             '</div>' +
+                                                        '</div>' +
+                                                        '<div class="col-lg-3">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="hidden" class="question-type-field" value="short_answer" />' +
+                                                                '<select class="form-control show-tick question-type-select" onchange="typeChanged(this)" required>' +
+                                                                    '<option value="short_answer" selected>' +
+                                                                        'Short Answer' +
+                                                                    '</option>' +
+                                                                    '<option value="multiple_choice">' +
+                                                                        'Multiple Choice' +
+                                                                    '</option>' +
+                                                                '</select>' +
+                                                            '</div>' +
                                                         '</div>' +
                                                     '</div>' +
-                                                    '<div class="form-group">' +
-                                                        '<div class="form-line">' +
-                                                            '<input class="form-control answer-field" placeholder="Answer" type="text" value="" />' +
-                                                            '<div class="help-info">Answer strings are not case sensitive</div>' +
+                                                    '<div class="answer-container">' +
+                                                        '<div class="form-group">' +
+                                                            '<div class="form-line">' +
+                                                                '<input class="form-control answer-field" placeholder="Answer" type="text" value="" />' +
+                                                                '<div class="help-info">Answer strings are not case sensitive</div>' +
+                                                            '</div>' +
                                                         '</div>' +
                                                     '</div>' +
                                                     '<div class="align-center">' +
@@ -236,9 +327,10 @@ End Section
                             )
                             x++;
                             arrangeModelBinding();
+                            var pixelFromTop = $(document).height();
+                            $('html,body').animate({ scrollTop: pixelFromTop }, 'slow');
                         }
                     })
-
         $(wrapper).on("click", ".remove-question-btn", function (e) {
             //user click on remove field
             e.preventDefault();
@@ -254,22 +346,214 @@ End Section
     });
 
     function arrangeModelBinding() {
-        var current = 0;
+        var shortAnswerFields
+        var choicesInputGroup
         $('.question-field').each(function (i, obj) {
             //For the Question Field
-            obj.id = "Questions_"+ (current) +"__Statement"
-            obj.name = "Questions[" + (current) + "].Statement"
-            current++;
+            obj.id = "Questions_"+ (i) +"__Statement"
+            obj.name = "Questions[" + (i) + "].Statement"
+
+            //Arragning short answers by the QUESTION OBJECT they are in.
+            shortAnswerFields = $(this).parent().parent().parent().parent().parent().find(".answer-field")
+            shortAnswerFields.each(function (j, obj) {
+                obj.id = "Questions_" + (i) + "__Answer"
+                obj.name = "Questions[" + (i) + "].Answer"
+            });
+
+            choicesInputGroup = $(this).parent().parent().parent().parent().parent().find(".choice-input-group");
+            arrangeChoiceModelBinding(choicesInputGroup, i);
+
         });
-        current = 0
-        $('.answer-field').each(function (i, obj) {
+        $('.question-type-field').each(function (i, obj) {
             //For the Question Field
-            obj.id = "Questions_" + (current) + "__Answer"
-            obj.name = "Questions[" + (current) + "].Answer"
-            current++;
+            obj.id = "Questions_" + (i) + "__Type"
+            obj.name = "Questions[" + (i) + "].Type"
+
+        });
+        //FOR EDIT FORM ONLY SINCE THE ADD DOES NOT HAVE QUESTION ID YET
+        $('.question-id-field').each(function (i, obj) {
+            obj.id = "Questions_" + (i) + "__QuestionID"
+            obj.name = "Questions[" + (i) + "].QuestionID"
         });
 
+        $('.question-type-select').selectpicker();
     }
-    </script>
+
+    function arrangeChoiceModelBinding(inputGroup,ctr) {
+        //alert(inputGroup.length)
+        //$(inputGroup).each(function (j, iGroup) {
+        //    iGroup.id = "HATDOG";
+        //})
+
+        //arranging checkboxes ( isAnswer )
+        inputGroup.find(".isAnswer-field").each(function (i, obj) {
+            obj.id = "Questions_" + ctr + "__Choices_" + i + "__isAnswer"
+            obj.name = "Questions[" + ctr + "].Choices[" + i + "].isAnswer"
+        });
+        inputGroup.find(".isAnswer-checkbox").each(function (i, obj) {
+            obj.id = "Questions[" + ctr + "]Checkboxes[" + i + "]"
+        });
+        inputGroup.find("label").each(function (j, label) {
+            label.setAttribute("for", "Questions[" + ctr + "]Checkboxes[" + j + "]");
+        });
+
+        //arranging Choices item field
+        inputGroup.find(".choice-field").each(function (k, obj) {
+            obj.id = "Questions_" + ctr + "__Choices_" + k + "__Item"
+            obj.name = "Questions[" + ctr + "].Choices[" + k + "].Item"
+        });
+    }
+
+    function checkBoxClicked(element) {
+        //IMMITATE RADIO GROUP FOR CHECKBOXES
+        //alert($(element).parent().parent().parent().parent().find('input[type="checkbox"]').length);
+        var checkboxes = $(element).parent().parent().parent().parent().find('input[type="checkbox"]');
+        checkboxes.each(function (i, cb) {
+            if (cb === element) {
+                cb.checked = true;
+                //$(element).prev().val(true);
+            } else {
+                cb.checked = false;
+                //$(element).prev().val(false);
+            }
+
+            if ($(this).is(":checked")) {
+                //alert("Checkbox is checked.");
+                $(this).prev().val(true)
+            } else {
+                //alert("Checkbox is NOT checked.");
+                $(this).prev().val(false)
+            }
+        });
+
+        //TO apply the TRUE FALSE value of the CHECKBOXES
+        arrangeModelBinding();
+    }
+    function typeChanged(element) {
+        //$(element).parent().parent().children("input").first().val($(element).val())
+        var memberId = $(element).data("memberId");
+        var memberName = $(element).data("memberName");
+        var answerContainer = $(element).parent().parent().parent().parent().parent().find(".answer-container");
+
+        if ($(element).val() === "short_answer") {
+            //alert("SHORT ANSWER")
+            answerContainer.children().remove();
+            answerContainer.append(
+                    '<div Class="form-group">' +
+                        '<div Class="form-line">' +
+                            '<input class="form-control answer-field" placeholder="Answer" type="text" data-index="0" />' +
+                            '<div Class="help-info">Answer strings are Not case sensitive</div>' +
+                        '</div>' +
+                    '</div>'
+                )
+            $(element).parent().parent().find(".question-type-field").val("short_answer");
+        } else if ($(element).val() === "multiple_choice") {
+            //alert("MULTIPLE CHOICE")
+
+            answerContainer.children().remove();
+            answerContainer.append(
+                   '<div class="row clearfix choices-wrapper">' +
+                        '<div class="col-md-12" style="margin-bottom:0px;">' +
+                            '<div class="input-group input-group-sm choice-input-group" style="margin-bottom:0px;">' +
+                                '<span class="input-group-addon">' +
+                                    '<input type="hidden" class="isAnswer-field" value="false" />' +
+                                    '<input type="checkbox" onclick="checkBoxClicked(this)" class="chk-col-green isAnswer-checkbox"/>' +
+                                    '<label class="isAnswer-checkbox-label"></label>' +
+                                '</span>' +
+                                '<div class="form-line">' +
+                                    '<input type="text" class="form-control choice-field">' +
+                                '</div>' +
+                                '<span class="input-group-addon remove-choice-span" onclick="choiceAction(this,2)" style="cursor:pointer;">' +
+                                        '<i class="material-icons col-red">delete_forever</i>' +
+                                '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="row clearfix" id="add-choice-wrapper">' +
+                        '<span data-count="1" class="pull-right p-r-15 add-choice-button" style="cursor:pointer;" onclick="choiceAction(this,1)">' +
+                            '<small>Add another Choice</small>' +
+                            '<i class="material-icons font-18 col-green" style="position:relative;top:5px;">add_circle</i>' +
+                        '</span>' +
+                    '</div>'
+               );
+            $(element).parent().parent().find(".question-type-field").val("multiple_choice");
+        }
+        arrangeModelBinding();
+    }
+    function choiceAction(element, mode) {
+        var maxChoices = 4;
+        var choicesWrapper = $(element).parent().parent().find(".choices-wrapper");
+
+        if (mode === 1) {
+            //do the additions here
+            var count = parseInt($(element).data("count"));
+            if (count <= maxChoices) {
+                var choiceNode = $(
+                    '<div class="col-md-12" style="margin-bottom:0px;">' +
+                        '<div class="input-group input-group-sm choice-input-group" style="margin-bottom:0px;">' +
+                             '<span class="input-group-addon">' +
+                                    '<input type="hidden" class="isAnswer-field" value="false" />' +
+                                    '<input type="checkbox" onclick="checkBoxClicked(this)" class="chk-col-green isAnswer-checkbox"/>' +
+                                    '<label class="isAnswer-checkbox-label"></label>' +
+                                '</span>' +
+                            '<div class="form-line">' +
+                                '<input type="text" class="form-control choice-field">' +
+                            '</div>' +
+                            '<span class="input-group-addon remove-choice-span" onclick="choiceAction(this,2)" style="cursor:pointer;">' +
+                                    '<i class="material-icons col-red">delete_forever</i>' +
+                            '</span>' +
+                        '</div>' +
+                    '</div>'
+                    );
+                choiceNode.prependTo($(choicesWrapper));
+                $(element).data("count", count+1);
+            } else {
+                swal("MAXIMUM CHOICES REACHED");
+            }
+        } else {
+            var addChoiceBtn = $(element).parent().parent().parent().parent().find(".add-choice-button");
+            count = parseInt(addChoiceBtn.data("count"));
+            if (count > 1) {
+                $(element).parent().remove();
+                addChoiceBtn.data("count", count - 1);
+            } else {
+                swal("CANNOT REMOVE LAST ENTRY");
+            }
+
+        }
+        arrangeModelBinding();
+    }
+    function choiceActionViewBuilder() {
+        $('.question-field').each(function (i, obj) {
+            //var choiceInputGroup = $(this).parent().parent().parent().parent().parent().find(".choice-input-group");
+            var choiceInputGroup = $(this)
+
+            var removeChoice = $('<span class="input-group-addon remove-choice-span">' +
+                                    '<a onclick="choiceAction(this,2)" class="choice-action-remove">' +
+                                        '<i class="material-icons col-red">delete_forever</i>' +
+                                    '</a>' +
+                                '</span>');
+            var addChoice = $('<span class="input-group-addon add-choice-span">' +
+                                '<a id="addChoiceBtn" onclick="choiceAction(this,1)" class="choice-action add" data-count=' + (choiceInputGroup.length - 1) + '>' +
+                                    '<i class="material-icons col-green">add_circle_outline</i>' +
+                                '</a>' +
+                            '</span>');
+
+            alert($(choiceInputGroup).className)
+            choiceInputGroup.find('.add-choice-span').remove();
+            choiceInputGroup.find(".remove-choice-span").each(function (j, remSpan) {
+                remSpan.remove();
+            });
+
+            choiceInputGroup.each(function (k, iGroup) {
+                if (k === (choiceInputGroup.length - 1)) {
+                    addChoice.appendTo(iGroup);
+                } else if(k < (choiceInputGroup.length - 1)) {
+                    removeChoice.appendTo(iGroup);
+                }
+            });
+        });
+    }
+</script>
 End Section
 

@@ -126,7 +126,6 @@ End Section
         <!--QUESTIONS ROW-->
         <div Class="row" id="questions-row">
             <!--QUESTION COL-->
-            
             <div Class="col-lg-12 question-col">
                 <div Class="card q-card">
                     <div Class="body">
@@ -266,7 +265,7 @@ End Using
                                                         '</div>' +
                                                         '<div class="col-lg-3">' +
                                                             '<div class="form-group">' +
-                                                                '<input type="hidden" class="question-type-field" value="short_answer" />' +
+                                                                '<input type="hidden" class="question-type-field" value="short_answer"/>' +
                                                                 '<select class="form-control show-tick question-type-select" onchange="typeChanged(this)" required>' +
                                                                     '<option value="short_answer" selected>' +
                                                                         'Short Answer' +
@@ -340,7 +339,7 @@ End Using
             //For the Question Field
             obj.id = "Questions_" + (i) + "__Type"
             obj.name = "Questions[" + (i) + "].Type"
-            
+
         });
         $('.question-type-select').selectpicker();
     }

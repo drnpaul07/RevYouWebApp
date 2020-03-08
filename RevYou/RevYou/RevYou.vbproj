@@ -304,8 +304,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".BackupFiles\Edited\Views\CREATEFORM - problem on duplic btn.html" />
-    <Content Include=".BackupFiles\Edited\Views\CreateForm.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\RevYou\css\noUiSlider-custom.css" />
@@ -3909,6 +3907,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".BackupFiles\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\RevYou\plugins\" />
     <Folder Include="Controllers\Test\" />

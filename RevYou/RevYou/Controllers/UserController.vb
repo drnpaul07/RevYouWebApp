@@ -141,7 +141,7 @@ Namespace Controllers
         End Function
 
         <HttpPost>
-        <ActionName("EditForm")>
+        <ActionName("EditFormTest")>
         <ValidateAntiForgeryToken>
         Public Function SubmitEditForm(model As ReviewerViewModel, FormID As Integer) As ActionResult
             Dim form As Form = New Form()
@@ -228,8 +228,173 @@ Namespace Controllers
                 db.Entry(form).State = EntityState.Modified
                 db.SaveChanges()
             End If
+
             Return RedirectToAction("/Reviewer")
         End Function
+
+        <HttpPost()>
+        <ActionName("EditForm")>
+        <ValidateAntiForgeryToken()>
+        Function Edit(model As ReviewerViewModel, FormID As Integer) As ActionResult
+            Dim form = db.Form.Where(Function(m) m.FormID = FormID).FirstOrDefault
+
+            Dim unusedFormTags As List(Of FormTag) = New List(Of FormTag)
+            Dim formTagNames As List(Of String) = New List(Of String)
+            Dim unsavedNewFormTags As List(Of FormTag) = New List(Of FormTag)
+
+            If ModelState.IsValid And form.User.Username = User.Identity.Name Then
+                'Compare muna natin kung ano yung mga tag ( na naka save sa form ) na wala sa current submitted na tags
+                For Each item In form.FormTags
+                    If model.Tags.Contains(item.Tag.Name) Then
+                        Debug.WriteLine("NEW TAGS CONTAINS:" + item.Tag.Name)
+                    Else
+                        Debug.WriteLine("NEW TAGS DOES NOT CONTAINS:" + item.Tag.Name)
+                        unusedFormTags.Add(item)                        'If db.Tag.Where(Function(a) a.Name = item.Tag.Name).FirstOrDefault IsNot Nothing Then
+                        '    Debug.Write("THE NEW FORM TAG IS IN THE TAG TABLE")
+                        'Else
+                        '    Debug.WriteLine("THE NEW FORM TAG IS NOT IN THE TAG TABLE")
+                        'End If
+                    End If
+                Next
+
+                'ngayon, reremove na natin agad yung mga current saved FormTags na wala sa newly submitted na mga Form Tags
+                For Each item In unusedFormTags
+                    Debug.WriteLine("The UNUSED TAG WILL BE REMOVED: " + item.Tag.Name)
+                    db.FormTag.Remove(item)
+                    db.SaveChanges()
+                Next
+                'so nadelete na lahat ng unused sa FORMTAG TABLE, ngayon isasave naman natin yung mga bagong Tags.
+                'check muna kung nasa TAG table yun then pag andun. + 1 usage, pag wala. Create ng bagong TAG AT FORM TAG OBJECT
+                'lalagay ko muna sa String list yung lahat ng formtagName ng current form
+
+                For Each item In form.FormTags
+                    formTagNames.Add(item.Tag.Name)
+                Next
+                For Each item In model.Tags
+                    If formTagNames.Contains(item) Then
+                        Debug.WriteLine("THE NEW SUBMITTED TAG: " + item + "IS NOT NEW TAG")
+                    Else
+                        Debug.WriteLine("THE NEW SUBMITTED TAG: " + item + "IS A NEW TAG")
+                        Dim toCheckTag = db.Tag.Where(Function(a) a.Name = item).FirstOrDefault
+                        If toCheckTag IsNot Nothing Then
+                            Debug.WriteLine(item + "IS IN TAG TABLE SO INCREMENT THE USAGE")
+                            toCheckTag.Usage = toCheckTag.Usage + 1
+                            db.Entry(toCheckTag).State = EntityState.Modified
+                            db.SaveChanges()
+
+                            'will add existing TAG but not on this form
+                            unsavedNewFormTags.Add(New FormTag With {.FormID = FormID, .Tag = toCheckTag})
+                        Else
+                            Debug.WriteLine(item + "IS NOT IN TAG TABLE SO CREATE NEW")
+                            Dim newTag As Tag = New Tag()
+                            newTag.Name = item
+                            newTag.Usage = 1
+                            db.Tag.Add(newTag)
+                            db.SaveChanges()
+
+                            'will add all of this new tags later.
+                            unsavedNewFormTags.Add(New FormTag With {.FormID = FormID, .Tag = newTag})
+                        End If
+                    End If
+                Next
+
+                'QUESTION PROCESSING HERE
+                'move the QUESTION ids from form to a List of String
+                Dim questionIdList As List(Of String) = New List(Of String)
+                Dim newQuestionIdList As List(Of String) = New List(Of String)
+                'will delete all of the question with ID later so that i will save all the remaining content (NEW QUESTION)
+                Dim newQuestionList As List(Of Question) = New List(Of Question)
+                For Each item In form.Questions
+                    questionIdList.Add(item.QuestionID)
+                Next
+                For Each item In model.Questions
+                    newQuestionIdList.Add(item.QuestionID)
+
+                Next
+
+                'identify all of the REMOVED questions based on the newly submitted QUESTIONS and REMOVE IT
+                'ALAM KO NA YUNG ERROR!!! KASE PAG NAG SAVE AKO, SAME ID PERO DI KO PA DINEDELETE! AYOSS YES!!!
+                'so ang gagawin ko ngayon is indi ko na iiequal yung new question. update ko nalang sa loop yung QUESTIONS
+                For Each item In questionIdList
+                    If newQuestionIdList.Contains(item) Then
+                        Debug.WriteLine("THE QUESTION ID:" + item + " IS STILL USED")
+                        Dim q = db.Question.Where(Function(a) a.QuestionID = item).FirstOrDefault
+                        Dim nq = model.Questions.Where(Function(a) a.QuestionID = item).FirstOrDefault
+                        'Since need din maalis yung mga choices na nakasave tapos nabago ( naduduplicate ) delete
+                        'ko nalang lahat ng choices under ng question then save nalang yung bagong set.
+                        db.Choice.RemoveRange(db.Choice.Where(Function(a) a.QuestionID = item))
+                        db.SaveChanges()
+                        Debug.WriteLine(q.QuestionID)
+                        Debug.WriteLine(nq.QuestionID)
+
+                        q.Answer = nq.Answer
+                        q.Choices = nq.Choices
+                        q.Statement = nq.Statement
+                        q.Type = nq.Type
+
+                        db.Entry(q).State = EntityState.Modified
+                        db.SaveChanges()
+                        Debug.WriteLine("THE QUESTION ID:" + item + " WAS SAVED")
+                    Else
+                        Debug.WriteLine("THE QUESTION ID:" + item + " IS NOT USED ANYMORE")
+                        Dim uq As Question = db.Question.Where(Function(a) a.QuestionID = item).FirstOrDefault
+                        db.Question.Remove(uq)
+                        db.SaveChanges()
+                        Debug.WriteLine("THE QUESTION ID:" + item + " WAS REMOVED")
+                    End If
+                Next
+                'DELETE KO LANG YUNG MGA question na ginagamit parin pero updated na sa taas para matira yung
+                'mga BAGO pero di pa saved.
+                For Each item In model.Questions
+                    If item.QuestionID = 0 Then
+                        Debug.WriteLine("FOUND A NEW QUESTION ON UPDATE")
+                        item.FormID = FormID
+                        db.Question.Add(item)
+                        db.SaveChanges()
+                        Debug.WriteLine("SAVED NEW QUESTION ON UPDATE")
+                    End If
+                Next
+
+                Dim toSaveForm = db.Form.Where(Function(a) a.FormID = FormID).FirstOrDefault
+                'Checking for TAG PROCESSING RESULTS
+                For Each item In toSaveForm.FormTags
+                    Debug.WriteLine("THE CURRENT SAVED TAG AFTER TAG PROCCESSING:" + item.Tag.Name)
+                Next
+                For Each item In unsavedNewFormTags
+                    Debug.WriteLine("THE NEW TAG TO BE ADDED: " + item.Tag.Name)
+                Next
+
+
+                'SAVING unsavedTags to the form to be saved
+                For Each item In unsavedNewFormTags
+                    toSaveForm.FormTags.Add(item)
+                Next
+                'SAVING other fields to the form to be saved
+                toSaveForm.Title = model.Title
+                toSaveForm.Description = model.Description
+                toSaveForm.CategoryID = model.CategoryID
+
+                'to save the question we can add formID on the view or here to make it easier.
+                'iterate through all the questions and set the formID using the passed FormID
+                For i As Integer = 0 To model.Questions.Count - 1 Step 1
+                    Debug.WriteLine("QUESTION:" & model.Questions(i).QuestionID)
+                    model.Questions(i).FormID = FormID
+                    Debug.WriteLine(model.Questions(i).FormID)
+                Next
+
+                'toSaveForm.Questions = model.Questions
+
+
+                db.Entry(toSaveForm).State = EntityState.Modified
+                db.SaveChanges()
+                Debug.WriteLine("THE FORM HAS BEEN SAVED SUCCESSFULLY")
+            Else
+                Debug.WriteLine("MODEL IS NOT VALID!")
+                'Do some 505 error handling here
+            End If
+            Return RedirectToAction("/Reviewer")
+        End Function
+
         <HttpPost>
         <ActionName("DeleteForm")>
         <ValidateAntiForgeryToken>
