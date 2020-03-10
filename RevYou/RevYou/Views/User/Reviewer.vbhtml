@@ -213,7 +213,7 @@ End Section
                         <div Class="panel-footer">
                             <ul>
                                 <li>
-                                                            <a href = "/User/Preview/@form.FormID" >
+                                                            <a href = "/User/AnswerForm/@form.FormID" >
                                         <i class="material-icons">visibility</i>
                                                             <span> Preview</span>
                                     </a>

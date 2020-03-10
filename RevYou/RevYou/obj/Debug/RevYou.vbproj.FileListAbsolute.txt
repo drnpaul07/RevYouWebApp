@@ -78,7 +78,6 @@ E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.Owin.Security.OAuth
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.Owin.Security.Google.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.Owin.Security.Twitter.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbprojResolveAssemblyReference.cache
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Resources.resources
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbproj.GenerateResource.Cache
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.dll
@@ -87,3 +86,16 @@ E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.pdb
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.AppConf.APP_INIT.resources
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.ContoConf.CONTO_INIT.resources
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.RevConf.REV_INIT.resources
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbprojAssemblyReference.cache
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbproj.CopyComplete
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Buffers.dll
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Diagnostics.DiagnosticSource.dll
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Memory.dll
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Runtime.CompilerServices.Unsafe.dll
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.AI.PerfCounterCollector.xml
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Buffers.xml
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Diagnostics.DiagnosticSource.xml
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Memory.xml
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Runtime.CompilerServices.Unsafe.xml

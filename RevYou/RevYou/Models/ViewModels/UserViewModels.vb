@@ -11,5 +11,9 @@ Namespace ViewModels.User
         'List of questions
         Public Property Questions As IList(Of Question)
     End Class
+    Public Class FormAnsweringViewModel
+
+    End Class
 End Namespace
+
 

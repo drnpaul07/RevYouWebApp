@@ -405,5 +405,22 @@ Namespace Controllers
             Return RedirectToAction("/Reviewer")
         End Function
 
+        Public Function AnswerForm(id As Integer) As ActionResult
+
+            'else RETURN a ANSWERING PAGE
+            'Debug.WriteLine("The form id is : " & id)
+            Dim form = db.Form.Where(Function(m) m.FormID = id).FirstOrDefault
+
+            'Validate if the current user is the creator or not. If the Creator, then, Return preview Page
+            If form.User.Username = User.Identity.Name Then
+                'DO SOME PREVIEWING HERE ( same user and creator is same )
+                'Return RedirectToAction("/Reviewer")
+                Return View("AnswerForm", form)
+            Else
+                'DO SOME ANSWERING HERE
+                Return View("AnswerForm", form)
+            End If
+        End Function
+
     End Class
 End Namespace
