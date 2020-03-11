@@ -11,8 +11,18 @@ Namespace ViewModels.User
         'List of questions
         Public Property Questions As IList(Of Question)
     End Class
-    Public Class FormAnsweringViewModel
-
+    'Public Class AnsweringFormViewModelList
+    '    Public Property AnsweringFormViewModels As List(Of AnsweringFormViewModel)
+    'End Class
+    Public Class AnsweringFormViewModel
+        Public Property FormID As Integer
+        Public Property QAList As List(Of QuestionAndAnswer)
+    End Class
+    Public Class QuestionAndAnswer
+        Public Property QuestionID As Integer
+        Public Property QuestionType As String
+        Public Property ChoiceID As Integer
+        Public Property AnswerString As String
     End Class
 End Namespace
 

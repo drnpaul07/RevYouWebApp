@@ -1,4 +1,4 @@
-﻿@ModelType RevYou.Models.Reviewer.Form 
+﻿@ModelType RevYou.ViewModels.User.AnsweringFormViewModel
 @Code
     Layout = ""
     ViewBag.Title = "RevYou | View Form"
@@ -78,104 +78,140 @@ End Code
             margin-left:auto;
             margin-right:auto;
         }
+        .choices-col{
+            height:100%;
+            width:90%;
+            align-items:center;
+            margin-right:auto;
+            margin-left:auto;
+            padding-top:50px;
+        }
         .pager-nav{
             position:relative;
             width:100%;
         }
-       
-
-        
     </style>
 </head>
 
 <body class="theme-light-blue">
     <div class="container-fluid reviewer-body">
         <div class="">
-           
+
             @Using Html.BeginForm("AnswerForm", "User", FormMethod.Post, New With {.role = "form", .id = "review_form"})
-            @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
+                @<input type="hidden" id="FormID" name="FormID" value="@ViewBag.Form.FormID"/>
                 @<!-- Align Links -->
                 @<div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 reviewer-col">
-                    <div class="card reviewer-content">
-                        <div class="header">
-                            <h2>
-                                @Model.Title
-                                <small>Created by @Model.User.Username, @Model.DateCreated</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="row reviewer-status">
-                                <div class="col-lg-6">
-
-                                </div>
-                                <div class="col-lg-6">
-
-                                </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 reviewer-col">
+                        <div class="card reviewer-content">
+                            <div class="header">
+                                <h2>
+                                    @ViewBag.Form.Title
+                                    <small>Created by @ViewBag.Form.User.Username, @ViewBag.Form.DateCreated</small>
+                                </h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);">Action</a></li>
+                                            <li><a href="javascript:void(0);">Another action</a></li>
+                                            <li><a href="javascript:void(0);">Something else here</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                            @Code
-                                Dim qIndex As Integer = 0
-                            End Code
-                            @For Each question In Model.Questions
-                                qIndex = qIndex + 1
-                                @<div class="row question-row" id="question_@qIndex" data-index="@qIndex">
-                                    <div class="col-lg-12 question-col">
-                                        <h4> @question.Statement</h4>
+                            <div class="body">
+                                <div class="row reviewer-status">
+                                    <div class="col-lg-6">
+
                                     </div>
-                                    <div class="col-lg-5 col-sm-12 col-md-8 answer-col">
-                                        <div class="form-group form-group-lg">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control align-center" placeholder="Enter your answer here..">
-                                            </div>
+                                    <div class="col-lg-6">
+
+                                    </div>
+                                </div>
+                                @Code
+                                    Dim qIndex As Integer = 0
+                                    Dim divIndex As Integer = 0
+                                End Code
+                                @For Each question In ViewBag.Form.Questions
+                                    divIndex = qIndex + 1
+                                    @<div class="row question-row" id="question_@divIndex" data-index="@divIndex">
+                                        @*@Html.HiddenFor(Function(m) m.QAList(qIndex).QuestionID)*@
+                                        <input type="hidden" id="QAList_@(qIndex)__QuestionID" name="QAList[@qIndex].QuestionID" value="@question.QuestionID"/>
+                                        @*@Html.HiddenFor(Function(m) m.QAList(qIndex).QuestionType)*@
+                                        <input type="hidden" id="QAList_@(qIndex)__QuestionID" name="QAList[@qIndex].QuestionType" value="@question.Type"/>
+                                        <div class="col-lg-12 question-col">
+                                            <h4> @question.Statement</h4>
                                         </div>
+                                        @If question.Type = "short_answer" Then
+                                            @<div Class="col-lg-5 col-sm-12 col-md-8 answer-col">
+                                                <div Class="form-group form-group-lg">
+                                                    <div Class="form-line">
+                                                        @Html.TextBoxFor(Function(m) m.QAList(qIndex).AnswerString, New With {.class = "form-control align-center", .placeholder = "Enter your answer here.."})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ElseIf question.Type = "multiple_choice" Then
+                                            @Code
+                                                Dim chIndex As String = 0
+                                            End Code
+                                            @<div Class="col-lg-5 col-sm-12 col-md-8 choices-col">
+                                                @For Each choice In question.Choices
+                                                @Html.HiddenFor(Function(m) m.QAList(qIndex).ChoiceID, New With {.data_question_id = question.QuestionID, .class = "choice-field"})
+                                                   @<div class="container">
+                                                        <input type="checkbox" onclick="checkBoxClicked(this)" Class="chk-col-green choice-checkbox" id="checkbox-(@chIndex)"
+                                                                data-choice-id="@choice.ChoiceID" data-question-id="@question.QuestionID" />
+                                                        <Label Class="choice-checkbox-label" for="checkbox-(@chIndex)">@choice.Item</Label>
+                                                    </div>
+                                                    chIndex = chIndex + 1
+                                                Next
+                                            </div>
+                                                End If
                                     </div>
+                                                    qIndex = qIndex + 1
+                                                Next
+
                             </div>
-                            Next
-                            
-                        </div>
-                        
-                        <nav class="pager-nav">
-                            <div class="progress reviewer-progress">
-                                <div id="reviewProgressBar" class="progress-bar bg-cyan progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="@Model.Questions.Count">
-                                    TEXT
+
+                            <nav class="pager-nav">
+                                <div class="progress reviewer-progress">
+                                    <div id="reviewProgressBar" class="progress-bar bg-cyan progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="@ViewBag.Form.Questions.Count">
+                                        TEXT
+                                    </div>
                                 </div>
-                            </div>
-                            <ul class="pager">
-                                <li class="previous pull-left p-l-20">
-                                    <button  id="previousButton" onclick="navigateQuestion(this,'prev')" data-last="0"
-                                            type="button" class="btn bg-indigo waves-effect">
-                                        <i class="material-icons">keyboard_arrow_left</i>
-                                        <span>PREVIOUS</span>
-                                    </button>
-                                </li>
-                                <li class="next pull-right p-r-20">
-                                    <button id="nextButton" onclick="navigateQuestion(this,'next')" data-next="2"
-                                            type="button" class="btn bg-indigo waves-effect">
-                                        <span>NEXT</span>
-                                        <i class="material-icons">keyboard_arrow_right</i>
-                                    </button>
+                                <ul class="pager">
+                                    <li class="previous pull-left p-l-20">
+                                        <button id="previousButton" onclick="navigateQuestion(this,'prev')" data-last="0"
+                                                type="button" class="btn bg-indigo waves-effect">
+                                            <i class="material-icons">keyboard_arrow_left</i>
+                                            <span>PREVIOUS</span>
+                                        </button>
+                                    </li>
+                                    <li class="next pull-right p-r-20">
+                                        <button id="nextButton" onclick="navigateQuestion(this,'next')" data-next="2"
+                                                type="button" class="btn bg-indigo waves-effect">
+                                            <span>NEXT</span>
+                                            <i class="material-icons">keyboard_arrow_right</i>
+                                        </button>
+                                    </li>
                                     
-                                </li>
-                            </ul>
-                        </nav>
+                                        <li class="next pull-right p-r-20" id="submitButtonLi">
+                                            <button id="submitButton" type="submit" class="btn bg-light-blue waves-effect" form="review_form">
+                                                <span>SUBMIT</span>
+                                                <i class="material-icons">send</i>
+                                            </button>
+                                        </li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @<!-- #END# Align Links -->
-                                End Using
-    
+                @<!-- #END# Align Links -->
+                                    End Using
+
         </div>
 
     </div>
@@ -203,13 +239,42 @@ End Code
 
             //disable previous button when initialized
             $("#previousButton").prop('disabled', true);
+            $("#submitButtonLi").hide();
+            //disable next button if 1 question only
+            if ($(".question-row").length <= 1) {
+                $("#nextButton").prop('disabled', true);
+                $("#nextButton").hide();
+                $("#submitButtonLi").show();
+            }
 
             //progress initialization
             $("#reviewProgressBar").css("width", (parseInt($("#reviewProgressBar").attr("aria-valuenow")) / parseInt($("#reviewProgressBar").attr("aria-valuemax")) * 100) + "%");
             $("#reviewProgressBar").text("Question " + $("#reviewProgressBar").attr("aria-valuenow") + " out of " + $("#reviewProgressBar").attr("aria-valuemax"));
         });
-        
-  
+        function submitForm() {
+            $("#review_form").submit();
+        }
+        function checkBoxClicked(element) {
+
+            var checkBoxes = $(".choice-checkbox");
+            console.log(checkBoxes.length);
+            //immitating Radio Button Group
+            $(checkBoxes).each(function (i, obj) {
+                if ($(obj).data("questionId") === $(element).data("questionId")) {
+                    if (obj != element) {
+                        $(obj).prop("checked", false);
+                    } else {
+                        $(obj).prop("checked", true);
+                    }
+                }
+            });
+            $(".choice-field").each(function (i, obj) {
+                if ($(element).data("questionId") === $(obj).data("questionId")) {
+                    $(obj).val($(element).data("choiceId"))
+                }
+            })
+
+        }
         function navigateQuestion(element, action) {
             var previousButton = $("#previousButton");
             var nextButton = $("#nextButton");
@@ -219,15 +284,7 @@ End Code
                 console.log("Next Question Button was clicked!");
                 console.log("QUESTION ROWS NUMBER:" + $(questionRows).length);
 
-                //Progress bar ( for testing only )
-                var valueNow = $("#reviewProgressBar").attr("aria-valuenow");
-                    valueNow = parseInt(valueNow) + 1;
-                var valueMax = $("#reviewProgressBar").attr("aria-valuemax");
-                $("#reviewProgressBar").attr("aria-valuenow",valueNow)
-                var progress = (parseInt(valueNow) / parseInt(valueMax)) * 100;
-                $("#reviewProgressBar").css("width", progress + "%")
-                $("#reviewProgressBar").text("Question " + $("#reviewProgressBar").attr("aria-valuenow") + " out of " + $("#reviewProgressBar").attr("aria-valuemax"));
-                //Progress bar ( for testing only )
+                updateProgressBar("next");
 
                 $(previousButton).prop("disabled", false);
                 if ($(element).data("next") <= questionRows.length) {
@@ -249,18 +306,33 @@ End Code
                 //if max, no more increment
                 else {
                     console.log("Cannot increment NEXT if Last Question")
+                    $("#submitButtonLi").show();
+                    $("#nextButton").hide();
                 }
 
                 //disabler of next button
                 if ($(element).data("next") === questionRows.length + 1) {
                     $("#nextButton").prop('disabled', true);
+
+                    //hides next, shows submit
+                    $("#submitButtonLi").show();
+                    $("#nextButton").hide();
                 } else {
                     $("#nextButton").prop('disabled', false);
+
+                    //shows next, hides submit
+                    $("#submitButtonLi").hide();
+                    $("#nextButton").show();
                 }
                 
             } else if (action === 'prev') {
                 console.log("Previous Question Button was clicked!");
-                 $(nextButton).prop("disabled", false);
+                $(nextButton).prop("disabled", false);
+                //shows next, hides submit
+                    $("#submitButtonLi").hide();
+                    $("#nextButton").show();
+                updateProgressBar(action)
+
                 if ($(element).data("last") > 0) {
 
                     $(questionRows).each(function (i, obj) {
@@ -286,6 +358,20 @@ End Code
                 }
                 
             }
+        }
+        function updateProgressBar(action) {
+            var valueNow = $("#reviewProgressBar").attr("aria-valuenow");
+            var valueMax = $("#reviewProgressBar").attr("aria-valuemax");
+            if (action === "next") {
+                valueNow = parseInt(valueNow) + 1;
+            } else {
+                valueNow = parseInt(valueNow) - 1;
+            }
+            //draw progress bar
+            $("#reviewProgressBar").attr("aria-valuenow",valueNow)
+                var progress = (parseInt(valueNow) / parseInt(valueMax)) * 100;
+            $("#reviewProgressBar").css("width", progress + "%")
+            $("#reviewProgressBar").text("Question " + $("#reviewProgressBar").attr("aria-valuenow") + " out of " + $("#reviewProgressBar").attr("aria-valuemax"));  
         }
     </script>
 </body>

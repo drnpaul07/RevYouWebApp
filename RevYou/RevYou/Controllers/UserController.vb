@@ -35,7 +35,7 @@ Namespace Controllers
                         currentDisplayed = userForms.Count
                     End If
                 ElseIf viewMode = "all" Then
-                        currentDisplayed = userForms.Count
+                    currentDisplayed = userForms.Count
                 End If
             Else
                 currentDisplayed = userForms.Count
@@ -415,11 +415,50 @@ Namespace Controllers
             If form.User.Username = User.Identity.Name Then
                 'DO SOME PREVIEWING HERE ( same user and creator is same )
                 'Return RedirectToAction("/Reviewer")
-                Return View("AnswerForm", form)
+                'Return View("AnswerForm", form)
+                ViewBag.Form = form
+                Return View()
             Else
-                'DO SOME ANSWERING HERE
-                Return View("AnswerForm", form)
+                ViewBag.Form = form
+                Return View()
             End If
+        End Function
+
+        <HttpPost>
+        <ActionName("AnswerForm")>
+        <ValidateAntiForgeryToken>
+        Public Function AnsweringFormPOST(model As AnsweringFormViewModel) As ActionResult
+            Dim score As Integer = 0
+            If ModelState.IsValid Then
+                Debug.WriteLine("FORM ID: " & model.FormID)
+                Debug.WriteLine("QA List Size: " & model.QAList.Count)
+                For Each item In model.QAList
+                    Debug.WriteLine("QUESTION ID: " & item.QuestionID)
+                    Debug.WriteLine("QUESTION TYPE: " & item.QuestionType)
+                    Debug.WriteLine("QUESTION SH_ANSWER: " & item.AnswerString)
+                    Debug.WriteLine("QUESTION CHOICE: " & item.ChoiceID)
+                    'Counting Scores
+                    Dim currentQuestion = db.Question.Where(Function(m) m.QuestionID = item.QuestionID).FirstOrDefault
+                    If item.QuestionType = "short_answer" Then
+                        If item.AnswerString = currentQuestion.Answer Then
+                            score = score + 1
+                        End If
+                    ElseIf item.QuestionType = "multiple_choice" Then
+                        If item.ChoiceID = currentQuestion.Choices.Where(Function(m) m.isAnswer = True).FirstOrDefault().ChoiceID Then
+                            score = score + 1
+                        End If
+                    End If
+                Next
+                Debug.WriteLine("=========================================")
+                Debug.WriteLine("YOU SCORED: " & score)
+                Debug.WriteLine("=========================================")
+                'return for model valid
+                Return RedirectToAction("/Reviewer")
+            Else
+                'return for model invalid
+                Return RedirectToAction("/Reviewer")
+            End If
+
         End Function
 
     End Class
