@@ -1,32 +1,35 @@
-﻿<!DOCTYPE html>
-<html>
-
-<head>
+<html class="chrome"><head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Profile | Bootstrap Based Admin Template - Material Design</title>
+        <title>RevYou (Auth) | Dashboard</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
     <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Waves Effect Css -->
-    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
-
-    <!-- Animation Css -->
-    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
-
-    <!-- Custom Css -->
-    <link href="../../css/style.css" rel="stylesheet">
-
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
-    <style type="text/css">
+    
+        <!-- Waves Effect Css -->
+        <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+    
+        <!-- Animation Css -->
+        <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+    
+        <!-- Custom Css -->
+        <link href="../../css/style.css" rel="stylesheet">
+    
+        <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+        <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+    <style>
+        .sidebar .user-info{
+            background: url("/Content/RevYou/images/revyou-banner.png") no-repeat no-repeat !important;
+        }
+        .theme-light-blue .navbar{
+           border-bottom: #0380bc 4px solid !important;
+        }
         #imgtext{
           position: relative;
           text-align: center;
@@ -38,10 +41,10 @@
             left: 50%;
             transform: translate(-50%, -50%);}
     </style>
-
+    
 </head>
 
-<body class="theme-light-blue" data-gr-c-s-loaded="true">
+<body class="theme-light-blue" style="zoom: 1;" data-gr-c-s-loaded="true">
     <!-- Page Loader -->
     <div class="page-loader-wrapper" style="display: none;">
         <div class="loader">
@@ -313,7 +316,7 @@
             <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">
-                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 799px;"><ul class="list" style="overflow: hidden; width: auto; height: 799px;">
+                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 145px;"><ul class="list" style="overflow: hidden; width: auto; height: 145px;">
                     <li class="header">MAIN NAVIGATION</li>
                     <li id="dashboardNav" class="active">
                         <a href="/Home/Index" class=" waves-effect waves-block">
@@ -377,7 +380,7 @@
                             <span>Logout</span>
                         </a>
                     </li>
-                </ul><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 799px;"></div><div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                </ul><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px; height: 44.0776px;"></div><div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
@@ -400,11 +403,11 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade" id="skins">
-                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 967px;"><ul class="demo-choose-skin" style="overflow: hidden; width: auto; height: 967px;">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 313px;"><ul class="demo-choose-skin" style="overflow: hidden; width: auto; height: 313px;">
                     </ul><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 6px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 6px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade tab-pane fade in active in active" id="settings">
-                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 967px;"><div class="demo-settings" style="overflow: hidden; width: auto; height: 967px;">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 313px;"><div class="demo-settings" style="overflow: hidden; width: auto; height: 313px;">
                         <p>GENERAL SETTINGS</p>
                         <ul class="setting-list">
                             <li>
@@ -450,7 +453,7 @@
                                 </div>
                             </li>
                         </ul>
-                    </div><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 6px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 967px;"></div><div class="slimScrollRail" style="width: 6px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                    </div><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 6px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px; height: 199.53px;"></div><div class="slimScrollRail" style="width: 6px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                 </div>
             </div>
         </aside>
@@ -458,309 +461,210 @@
     </section>
 
     <section class="content">
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-3">
-                    <div class="card profile-card">
-                        <div class="profile-header">&nbsp;</div>
-                        <div class="profile-body">
-                            <div class="image-area">
-                                <img src="../../images/user-lg.jpg" alt="AdminBSB - Profile Image" />
-                            </div>
-                            <div class="content-area">
-                                <h3>John Doe</h3>
-                                <p>Electronics Engineering Student</p>
-                                <p>"Soar High, Sore Eye!"</p>
-                            </div>
-                        </div>
-                        <div class="profile-footer">
-                            <ul>
-                                <li>
-                                    <span>Reviewers</span>
-                                    <span>32</span>
-                                </li>
-                                <li>
-                                    <span>Forms Created</span>
-                                    <span>5</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="container-fluid">
+                <div class="row clearfix">
 
-                    <div class="card card-about-me">
-                        <div class="header">
-                            <h2>ABOUT ME</h2>
-                        </div>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">library_books</i>
-                                        Education
-                                    </div>
-                                    <div class="content">
-                                        B.S. in Electronics Engineering in PUP-Manila
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">location_on</i>
-                                        Location
-                                    </div>
-                                    <div class="content">
-                                        Sta. Mesa, Manila
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">local_offer</i>
-                                        Reviewer Tags
-                                    </div>
-                                    <div class="content">
-                                        <a href="#"><span class="label bg-red">Engineering</span></a>
-                                        <a href="#"><span class="label bg-teal">Circuits</span></a>
-                                        <a href="#"><span class="label bg-blue">Electronics</span></a>
-                                        <a href="#"><span class="label bg-amber">Signal Processing</span></a>
-                                        <a href="#"><span class="label bg-red">Calculus</span></a>
-                                        <a href="#"><span class="label bg-teal">Advance Mathematics</span></a>
-                                        <a href="#"><span class="label bg-blue">Physics</span></a>
-                                        <a href="#"><span class="label bg-amber">Networks</span></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">notes</i>
-                                        Description
-                                    </div>
-                                    <div class="content">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-9">
-                    <div class="card">
-                        <div class="body">
-                            <div>
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                                    <li role="presentation"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
-                                    <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
-                                </ul>
-
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                        <div class="panel panel-default panel-post">
-                                            <div class="panel-heading">
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img src="../../images/user-lg.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">
-                                                            <a href="#">John Doe</a>
-                                                        </h4>
-                                                        Shared publicly - March 08, 2020
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="post">
-                                                    <div class="post-heading">
-                                                        <p>Horray, John! You scored 50 points in <a href="#">ECE Board Exam Reviewer</a> posted by <a href="#">Jane Doe</a>.</p>
-                                                    </div>
-                                                    <div class="post-content">
-                                                        <div id="imgtext">
-                                                            <img src="../../images/congrats_4.jpg" class="img-responsive">
-                                                            <div class="centered-text">
-                                                                <h1>50/50</h1>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                <div>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <div class="panel panel-default panel-post">
+                                                        <div class="panel-heading">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <a href="#">
+                                                                        <img src="../../images/user-lg.jpg">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <h4 class="media-heading">
+                                                                        <a href="#">Kent Fabillar</a>
+                                                                    </h4>
+                                                                    Shared publicly - March 13, 2020
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <div class="panel-body">
+                                                            <div class="post">
+                                                                <div class="post-heading">
+                                                                    <p>Kent just created a reviewer <a href="#">ManageMe System</a>. Try it now!</p>
+                                                                </div>
+                                                                    <a href="#" style="color:white">
+                                                                        <div class="post-content">
+                                                                            <div id="imgtext">
+                                                                                <img src="../../images/reviewer.jpg" class="img-responsive">
+                                                                                <div class="centered-text">
+                                                                                    <h1>ManageMe System</h1>
+                                                                                    <p></p><h2>by Kent Fabillar</h2><p></p>
+                                                                                    <p></p><h3>100 Items</h3><p></p>
+                                                                                    <h3></h3>
+                                                                                </div>
+                                                                            </div>
+                                                                </div></a>
+                                                                
+                                                                    <div class="post-heading">
+                                                                        <p><i class="material-icons md-18">local_offer</i>
+                                                                        Reviewer Tags</p>
+                                                                        <a href="#"><span class="label bg-red">Engineering</span></a>
+                                                                        <a href="#"><span class="label bg-teal">Management</span></a>
+                                                                    </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-footer">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="material-icons">menu_book</i>
+                                                                        <span>Review Now</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="material-icons">share</i>
+                                                                        <span>Commend Reviewer</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">menu_book</i>
-                                                            <span>Review Again</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">share</i>
-                                                            <span>Commend Reviewer</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="panel panel-default panel-post">
-                                            <div class="panel-heading">
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img src="../../images/user-lg.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">
-                                                            <a href="#">John Doe</a>
-                                                        </h4>
-                                                        Shared publicly - March 08, 2020
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="post">
-                                                    <div class="post-heading">
-                                                        <p>John just created a reviewer <a href="#">I Review, 3,000</a>. Try it now!</p>
-                                                    </div>
-                                                    <a href="#"><div class="post-content">
-                                                        <center>
-                                                            <h1>I Review, 3,000</h1>
-                                                            <p><h2>by John Doe</h2></p>
-                                                            <p><h3>100 Items</h3></p>
-                                                            <h3></h3>
-                                                        </center>
-                                                    </div></a>
                                                     
-                                                        <div class="post-heading">
-                                                            <p><i class="material-icons md-18">local_offer</i>
-                                                            Reviewer Tags</p>
-                                                            <a href="#"><span class="label bg-red">Engineering</span></a>
-                                                            <a href="#"><span class="label bg-teal">Circuits</span></a>
-                                                            <a href="#"><span class="label bg-blue">Electronics</span></a>
-                                                            <a href="#"><span class="label bg-amber">Signal Processing</span></a>
-                                                        </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">menu_book</i>
-                                                            <span>Review Now</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">share</i>
-                                                            <span>Commend Reviewer</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                            <div class="panel panel-default panel-post">
+                                                                <div class="panel-heading">
+                                                                    <div class="media">
+                                                                        <div class="media-left">
+                                                                            <a href="#">
+                                                                                <img src="../../images/user-lg.jpg">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="media-body">
+                                                                            <h4 class="media-heading">
+                                                                                <a href="#">Adrian Paul</a>
+                                                                            </h4>
+                                                                            Shared publicly - March 10, 2020
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="post">
+                                                                        <div class="post-heading">
+                                                                            <p>Adrian just created a reviewer <a href="#">Teach us, Senpai</a>. Try it now!</p>
+                                                                        </div>
+                                                                        <a href="#" style="color:white"><div class="post-content">
+                                                                                <div id="imgtext">
+                                                                                <img src="../../images/reviewer.jpg" class="img-responsive">
+                                                                                <div class="centered-text">
+                                                                                    <h1>Teach us, Senpai</h1>
+                                                                                    <p></p><h2>by Adrian Paul</h2><p></p>
+                                                                                    <p></p><h3>100 Items</h3><p></p>
+                                                                                    <h3></h3>
+                                                                                </div>
+                                                                                </div>
+                                                                        </div></a>
+                                                                        
+                                                                            <div class="post-heading">
+                                                                                <p><i class="material-icons md-18">local_offer</i>
+                                                                                Reviewer Tags</p>
+                                                                                <a href="#"><span class="label bg-red">Engineering</span></a>
+                                                                                <a href="#"><span class="label bg-teal">Circuits</span></a>
+                                                                                <a href="#"><span class="label bg-blue">Electronics</span></a>
+                                                                                <a href="#"><span class="label bg-amber">Signal Processing</span></a>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-footer">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="material-icons">menu_book</i>
+                                                                                <span>Review Now</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="material-icons">share</i>
+                                                                                <span>Commend Reviewer</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            
+                    
+                                                            <div class="panel panel-default panel-post">
+                                                                <div class="panel-heading">
+                                                                    <div class="media">
+                                                                        <div class="media-left">
+                                                                            <a href="#">
+                                                                                <img src="../../images/user-lg.jpg">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="media-body">
+                                                                            <h4 class="media-heading">
+                                                                                <a href="#">Ed Sheeran</a>
+                                                                            </h4>
+                                                                            Shared publicly - March 09, 2020
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="post">
+                                                                        <div class="post-heading">
+                                                                            <p>Ed just created a reviewer <a href="#">Lego House</a>. Try it now!</p>
+                                                                        </div>
+                                                                        <a href="#" style="color:white"><div class="post-content">
+                                                                            <div id="imgtext">
+                                                                                <img src="../../images/reviewer.jpg" class="img-responsive">
+                                                                                <div class="centered-text">
+                                                                                    <h1>Lego House</h1>
+                                                                                    <p></p><h2>by Ed Sheeran</h2><p></p>
+                                                                                    <p></p><h3>100 Items</h3><p></p>
+                                                                                    <h3></h3>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div></a>
+                                                                        
+                                                                            <div class="post-heading">
+                                                                                <p><i class="material-icons md-18">local_offer</i>
+                                                                                Reviewer Tags</p>
+                                                                                <a href="#"><span class="label bg-red">Sound Engineering</span></a>
+                                                                                <a href="#"><span class="label bg-teal">Music</span></a>
+                                                                                <a href="#"><span class="label bg-blue">Art</span></a>
+                                                                                <a href="#"><span class="label bg-amber">Music Production</span></a>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-footer">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="material-icons">menu_book</i>
+                                                                                <span>Review Now</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="material-icons">share</i>
+                                                                                <span>Commend Reviewer</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <form action="/User/Reviewer" id="showmore_form" method="get" role="form">                            
+                                                                <input name="viewMode" id="viewMode" type="hidden" value="offset">
+                                                                <input name="currentDisplayed" id="currentDisplayed" type="hidden" value="2">
+                                                                <ul class="pager">
+                                                                    <li> <a href="javascript:document.getElementById('showmore_form').submit()" class="waves-effect">-- Show More --</a></li>
+                                                                </ul>
+                                                            </form>
+                                                            <div id="bottom-element"></div>
                                         </div>
-                                        <form action="/User/Reviewer" id="showmore_form" method="get" role="form">                            
-                                            <input name="viewMode" id="viewMode" type="hidden" value="offset">
-                                            <input name="currentDisplayed" id="currentDisplayed" type="hidden" value="2">
-                                            <ul class="pager">
-                                                <li> <a href="javascript:document.getElementById('showmore_form').submit()" class="waves-effect">-- Show More --</a></li>
-                                            </ul>
-                                        </form>
-                                        <div id="bottom-element"></div>
-                                        
-                                        
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade in" id="profile_settings">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="Name" class="col-sm-2 control-label">Name </label>
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Name" value="John Doe" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                    <label for="Email" class="col-sm-2 control-label">Email</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-line">
-                                                            <input type="email" class="form-control" id="Email" name="Email" placeholder="Email" value="example@example.com" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <div class="form-group">
-                                                    <label for="Education" class="col-sm-2 control-label">Education</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" id="Education" name="Education" placeholder="Education" value="B.S. in Electronics Engineering in PUP-Manila" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <div class="form-group">
-                                                    <label for="Location" class="col-sm-2 control-label">Location</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" id="Location" name="Location" placeholder="Location" value="Sta. Mesa, Manila" required>
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                            <div class="form-group">
-                                                <label for="ReviewerTags" class="col-sm-2 control-label">Reviewer Tags</label>
-
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <textarea class="form-control" id="ReviewerTags" name="ReviewerTags" rows="3" placeholder="TAGS"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                    <label for="Description" class="col-sm-2 control-label">Description</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" id="Description" name="Description" placeholder="Description" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque." required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-danger">SAVE</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
-                                                <div class="col-sm-9">
-                                                    <div class="form-line">
-                                                        <input type="password" class="form-control" id="OldPassword" name="OldPassword" placeholder="Old Password" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
-                                                <div class="col-sm-9">
-                                                    <div class="form-line">
-                                                        <input type="password" class="form-control" id="NewPassword" name="NewPassword" placeholder="New Password" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
-                                                <div class="col-sm-9">
-                                                    <div class="form-line">
-                                                        <input type="password" class="form-control" id="NewPasswordConfirm" name="NewPasswordConfirm" placeholder="New Password (Confirm)" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-3 col-sm-9">
-                                                    <button type="submit" class="btn btn-danger">SUBMIT</button>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -768,30 +672,40 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
     <!-- Jquery Core Js -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="/Content/Template/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core Js -->
-    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
-
+    <script src="/Content/Template/plugins/bootstrap/js/bootstrap.js"></script>
     <!-- Select Plugin Js -->
-    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
-
+    <script src="/Content/Template/plugins/bootstrap-select/js/bootstrap-select.js"></script>
     <!-- Slimscroll Plugin Js -->
-    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-
+    <script src="/Content/Template/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
     <!-- Waves Effect Plugin Js -->
-    <script src="../../plugins/node-waves/waves.js"></script>
-
+    <script src="/Content/Template/plugins/node-waves/waves.js"></script>
     <!-- Custom Js -->
-    <script src="../../js/admin.js"></script>
-    <script src="../../js/pages/examples/profile.js"></script>
-
+    <script src="/Content/Template/js/admin.js"></script>
     <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
-</body>
+    <script src="/Content/Template/js/demo.js"></script>
 
-</html>
+    <script>
+        $(function () {
+            switch("/Home/Dashboard"){
+                case "/Home/Dashboard":
+                    $("#dashboardNav").addClass("active")
+                    break;
+                case "/Home/About":
+                    $("#revyouNav").addClass("active")
+                    $("#revyouNavAbout").addClass("active")
+                    break;
+                case "/Home/Contact":
+                    $("#revyouNav").addClass("active")
+                    $("#revyouNavContact").addClass("active")
+                    break;
+            }
+        })
+    </script>
+    
+
+
+</body></html>
