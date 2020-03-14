@@ -234,7 +234,7 @@ End Using
         $('.question-type-select').selectpicker();
 
         arrangeModelBinding(); //arranging model binding
-        var max_questions = 4; //maximum input boxes allowed is 5
+        var max_questions = 10; //maximum input boxes allowed is 10
         var wrapper = $("#questions-row"); //Fields wrapper
         var answerContainer = $("#answerContainer"); //Answer Container
         var add_button = $("#add-question-btn"); //Add button ID

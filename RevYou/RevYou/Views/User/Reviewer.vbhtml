@@ -180,8 +180,9 @@ End Section
                         <div Class="panel-heading">
                             <div Class="media">
                                 <div Class="media-left">
-                                    <a href = "#" >
-                                        <img src="/Content/Template/images/user-lg.jpg" />                                                                                                             </a>
+                                    <a href="#">
+                                        <img src="@Url.Content("~/Content/Template/images/user.png")" width="48" height="48" alt="User" />
+                                    </a>
                                 </div>
                                 <div Class="media-body">
                                     <h4 Class="media-heading">
@@ -213,9 +214,9 @@ End Section
                         <div Class="panel-footer">
                             <ul>
                                 <li>
-                                                            <a href = "/User/AnswerForm/@form.FormID" >
+                                                            <a  href="javascript:popupCenter({url: '/User/AnswerForm/@form.FormID', title: '', w:900, h: 700});  " >
                                         <i class="material-icons">visibility</i>
-                                                            <span> Preview</span>
+                                                            <span> Review</span>
                                     </a>
                                 </li>
 

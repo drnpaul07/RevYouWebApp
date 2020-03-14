@@ -263,10 +263,10 @@
       <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202002171737508_CONTO_INIT.vb" />
-    <Compile Include="Migrations\202003061046395_REV_INIT.Designer.vb">
-      <DependentUpon>202003061046395_REV_INIT.vb</DependentUpon>
+    <Compile Include="Migrations\202003141337317_REV_INIT.Designer.vb">
+      <DependentUpon>202003141337317_REV_INIT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003061046395_REV_INIT.vb" />
+    <Compile Include="Migrations\202003141337317_REV_INIT.vb" />
     <Compile Include="Migrations\ContoConf.vb" />
     <Compile Include="Migrations\AppConf.vb" />
     <Compile Include="Migrations\RevConf.vb" />
@@ -305,8 +305,8 @@
     <EmbeddedResource Include="Migrations\202002171737508_CONTO_INIT.resx">
       <DependentUpon>202002171737508_CONTO_INIT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003061046395_REV_INIT.resx">
-      <DependentUpon>202003061046395_REV_INIT.vb</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003141337317_REV_INIT.resx">
+      <DependentUpon>202003141337317_REV_INIT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -318,7 +318,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\RevYou\css\about.css" />
     <Content Include="Content\RevYou\css\noUiSlider-custom.css" />
+    <Content Include="Content\RevYou\images\celebrate-peppy.gif" />
+    <Content Include="Content\RevYou\images\peppy-boring.gif" />
+    <Content Include="Content\RevYou\images\peppy-cry.gif" />
+    <Content Include="Content\RevYou\images\picadz.jpg" />
+    <Content Include="Content\RevYou\images\picaldo.jpg" />
+    <Content Include="Content\RevYou\images\picboss.jpg" />
+    <Content Include="Content\RevYou\images\pickent.JPG" />
     <Content Include="Content\RevYou\images\revyou-banner.png" />
     <Content Include="Content\RevYou\images\revyou-icon.png" />
     <Content Include="Content\RevYou\images\revyou-title.png" />
@@ -3890,6 +3898,8 @@
     <Content Include="Views\User\EditForm.vbhtml" />
     <Content Include="Views\User\_FormList.vbhtml" />
     <Content Include="Views\User\AnswerForm.vbhtml" />
+    <Content Include="Views\User\TestResult.vbhtml" />
+    <Content Include="Views\User\Profile.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

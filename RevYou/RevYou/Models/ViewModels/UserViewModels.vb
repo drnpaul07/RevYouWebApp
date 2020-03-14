@@ -24,6 +24,13 @@ Namespace ViewModels.User
         Public Property ChoiceID As Integer
         Public Property AnswerString As String
     End Class
+
+    Public Class UserActivityViewModel
+        Public Property Action
+        Public Property Form As Form
+        Public Property Result As Result
+        Public Property Activity As UserActivity
+    End Class
 End Namespace
 
 

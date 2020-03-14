@@ -85,7 +85,6 @@ E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.pdb
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.AppConf.APP_INIT.resources
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.ContoConf.CONTO_INIT.resources
-E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.RevConf.REV_INIT.resources
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbprojAssemblyReference.cache
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.vbproj.CopyComplete
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\Microsoft.AspNet.TelemetryCorrelation.dll
@@ -99,3 +98,4 @@ E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Buffers.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Diagnostics.DiagnosticSource.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Memory.xml
 E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\bin\System.Runtime.CompilerServices.Unsafe.xml
+E:\Workspace_Github\RevYouWebApp\RevYou\RevYou\obj\Debug\RevYou.Migrations.RevConf.REV_INIT.resources

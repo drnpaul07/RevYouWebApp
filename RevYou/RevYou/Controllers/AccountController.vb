@@ -136,8 +136,12 @@ Public Class AccountController
                 .UserName = model.Username,
                 .Email = model.Email
             }
+
             Dim result = Await UserManager.CreateAsync(user, model.Password)
+
             If result.Succeeded Then
+                'ADDING ROLE
+                UserManager.AddToRole(user.Id, "USER")
                 'Adding Data for UserDatba DbSet
                 Dim revContext As New DAL.RevYouContext
                 revContext.UserData.Add(New Models.Base.UserData() With {.Username = model.Username, .Firstname = model.Firstname, .Surname = model.Surname})

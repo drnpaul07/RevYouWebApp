@@ -112,7 +112,14 @@ Namespace Controllers
                 form.FormTags = currentFormTags
                 form.IsPosted = False
 
+                Dim userActivity As UserActivity = New UserActivity
+                userActivity.Action = "ADDED"
+                userActivity.DateOfAction = DateTime.Now
+                userActivity.Form = form
+                userActivity.UserData = db.UserData.Where(Function(m) m.Username = User.Identity.Name).FirstOrDefault
+
                 db.Form.Add(form)
+                db.UserActivity.Add(userActivity)
                 db.SaveChanges()
             End If
 
@@ -453,12 +460,59 @@ Namespace Controllers
                 Debug.WriteLine("YOU SCORED: " & score)
                 Debug.WriteLine("=========================================")
                 'return for model valid
-                Return RedirectToAction("/Reviewer")
-            Else
-                'return for model invalid
-                Return RedirectToAction("/Reviewer")
+                Dim result As Result = New Result
+                ViewBag.TotalQuestion = model.QAList.Count
+                ViewBag.Score = score
+                If score > model.QAList.Count / 2 Then
+                    ViewBag.Grade = "pass"
+                    result.Grade = "PASS"
+                Else
+                    ViewBag.Grade = "fail"
+                    result.Grade = "FAIL"
+                End If
+
+
+                result.DateAnswered = DateTime.Now
+                result.Form = db.Form.Where(Function(m) m.FormID = model.FormID).FirstOrDefault
+                result.Score = score
+                result.UserData = db.UserData.Where(Function(m) m.Username = User.Identity.Name).FirstOrDefault()
+                db.Result.Add(result)
+                db.SaveChanges()
+
+                Dim userActivity As UserActivity = New UserActivity
+                userActivity.ResultID = db.Result.OrderByDescending(Function(m) m.ResultID).First().ResultID
+                userActivity.UserData = db.UserData.Where(Function(m) m.Username = User.Identity.Name).FirstOrDefault()
+                userActivity.Form = db.Form.Where(Function(m) m.FormID = model.FormID).FirstOrDefault
+                userActivity.Action = "ANSWERED"
+                userActivity.DateOfAction = DateTime.Now
+                db.UserActivity.Add(userActivity)
+
+
+                db.SaveChanges()
+                Return View("TestResult")
+                Else
+                    'return for model invalid
+                    Return RedirectToAction("/Reviewer")
             End If
 
+        End Function
+
+        Public Shadows Function Profile() As ActionResult
+            Dim userActivities = db.UserActivity.Where(Function(m) m.UserData.Username = User.Identity.Name).OrderByDescending(Function(m) m.UserActivityID).ToList()
+            Dim userActivityList As List(Of UserActivityViewModel) = New List(Of UserActivityViewModel)
+            For Each item In userActivities
+                Dim activity As UserActivityViewModel = New UserActivityViewModel
+                activity.Action = item.Action
+                activity.Activity = item
+                activity.Form = item.Form
+                activity.Result = db.Result.Where(Function(m) m.ResultID = item.ResultID).FirstOrDefault
+                userActivityList.Add(activity)
+            Next
+            ViewBag.UserActivities = userActivityList
+            ViewBag.UserData = db.UserData.Where(Function(m) m.Username = User.Identity.Name).FirstOrDefault
+
+            Debug.WriteLine("USER ACTIVITIES COUNT: " & userActivityList.Count)
+            Return View()
         End Function
 
     End Class

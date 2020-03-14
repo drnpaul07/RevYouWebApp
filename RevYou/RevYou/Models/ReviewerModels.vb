@@ -17,8 +17,13 @@ Namespace Models.Reviewer
 
         'This is the connected DbSet for this DbSet.
         Public Overridable Property Questions As IList(Of Question)
+
         'Public Overridable Property Tags As IList(Of Tag)
         Public Overridable Property FormTags As IList(Of FormTag)
+
+        'LATEST LISTS
+        Public Overridable Property UserActivities As IList(Of UserActivity)
+        Public Overridable Property Results As IList(Of Result)
 
         'This is the creator
         Public Property UserDataID As Integer
@@ -89,6 +94,35 @@ Namespace Models.Reviewer
 
         Public Property TagID As Integer
         Public Overridable Property Tag As Tag
+    End Class
+
+    Public Class Result
+        Public Property ResultID As Integer
+        Public Property UserDataID As Integer
+        Public Property FormID As Integer
+        Public Property Score As Integer
+        Public Property Grade As String
+        Public Property DateAnswered As DateTime
+
+        Public Overridable Property Form As Form
+        Public Overridable Property UserData As UserData
+
+        'Public Overridable Property UserActivities As IList(Of UserActivity)
+    End Class
+
+    Public Class UserActivity
+        Public Property UserActivityID As Integer
+        Public Property Action As String
+        Public Property UserDataID As Integer
+        'IF ANSWERED
+        Public Property ResultID As Integer
+        'IF CREATED A REVIEWER
+        Public Property FormID As Integer
+        Public Property DateOfAction As DateTime
+
+        Public Overridable Property Form As Form
+        Public Overridable Property UserData As UserData
+        'Public Overridable Property Result As Result
     End Class
 
 End Namespace

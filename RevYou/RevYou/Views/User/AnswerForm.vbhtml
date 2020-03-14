@@ -1,7 +1,7 @@
 ﻿@ModelType RevYou.ViewModels.User.AnsweringFormViewModel
 @Code
     Layout = ""
-    ViewBag.Title = "RevYou | View Form"
+    ViewBag.Title = "View Form"
 End Code
 <!DOCTYPE html>
 <html>
@@ -87,7 +87,7 @@ End Code
             padding-top:50px;
         }
         .pager-nav{
-            position:relative;
+            /*position:relative;*/
             width:100%;
         }
     </style>
@@ -97,7 +97,7 @@ End Code
     <div class="container-fluid reviewer-body">
         <div class="">
 
-            @Using Html.BeginForm("AnswerForm", "User", FormMethod.Post, New With {.role = "form", .id = "review_form"})
+            @Using Html.BeginForm("AnswerForm", "User", FormMethod.Post, New With {.role = "form", .id = "review_form", .onsubmit = "closeThis(this)"})
                 @Html.AntiForgeryToken()
                 @<input type="hidden" id="FormID" name="FormID" value="@ViewBag.Form.FormID"/>
                 @<!-- Align Links -->
@@ -124,11 +124,17 @@ End Code
                             </div>
                             <div class="body">
                                 <div class="row reviewer-status">
-                                    <div class="col-lg-6">
-
+                                    <div class="col-sm-6">
+                                        
                                     </div>
-                                    <div class="col-lg-6">
-
+                                    <div class="col-sm-6">
+                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        
                                     </div>
                                 </div>
                                 @Code
@@ -139,9 +145,9 @@ End Code
                                     divIndex = qIndex + 1
                                     @<div class="row question-row" id="question_@divIndex" data-index="@divIndex">
                                         @*@Html.HiddenFor(Function(m) m.QAList(qIndex).QuestionID)*@
-                                        <input type="hidden" id="QAList_@(qIndex)__QuestionID" name="QAList[@qIndex].QuestionID" value="@question.QuestionID"/>
+                                        <input type="hidden" id="QAList_@(qIndex)__QuestionID" name="QAList[@qIndex].QuestionID" value="@question.QuestionID" />
                                         @*@Html.HiddenFor(Function(m) m.QAList(qIndex).QuestionType)*@
-                                        <input type="hidden" id="QAList_@(qIndex)__QuestionID" name="QAList[@qIndex].QuestionType" value="@question.Type"/>
+                                        <input type="hidden" id="QAList_@(qIndex)__QuestionID" name="QAList[@qIndex].QuestionType" value="@question.Type" />
                                         <div class="col-lg-12 question-col">
                                             <h4> @question.Statement</h4>
                                         </div>
@@ -159,11 +165,11 @@ End Code
                                             End Code
                                             @<div Class="col-lg-5 col-sm-12 col-md-8 choices-col">
                                                 @For Each choice In question.Choices
-                                                @Html.HiddenFor(Function(m) m.QAList(qIndex).ChoiceID, New With {.data_question_id = question.QuestionID, .class = "choice-field"})
-                                                   @<div class="container">
-                                                        <input type="checkbox" onclick="checkBoxClicked(this)" Class="chk-col-green choice-checkbox" id="checkbox-(@chIndex)"
-                                                                data-choice-id="@choice.ChoiceID" data-question-id="@question.QuestionID" />
-                                                        <Label Class="choice-checkbox-label" for="checkbox-(@chIndex)">@choice.Item</Label>
+                                                    @Html.HiddenFor(Function(m) m.QAList(qIndex).ChoiceID, New With {.data_question_id = question.QuestionID, .class = "choice-field"})
+                                                    @<div class="container">
+                                                        <input type="checkbox" Class="chk-col-green choice-checkbox" id="checkbox-@(qIndex)@(chIndex)"
+                                                               data-choice-id="@choice.ChoiceID" data-question-id="@question.QuestionID" />
+                                                        <Label Class="choice-checkbox-label" for="checkbox-@(qIndex)@(chIndex)" onclick="checkBoxClicked(this)">@choice.Item</Label>
                                                     </div>
                                                     chIndex = chIndex + 1
                                                 Next
@@ -173,44 +179,45 @@ End Code
                                                     qIndex = qIndex + 1
                                                 Next
 
-                            </div>
-
-                            <nav class="pager-nav">
-                                <div class="progress reviewer-progress">
-                                    <div id="reviewProgressBar" class="progress-bar bg-cyan progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="@ViewBag.Form.Questions.Count">
-                                        TEXT
+                                <nav class="pager-nav">
+                                    <div class="progress reviewer-progress">
+                                        <div id="reviewProgressBar" class="progress-bar bg-cyan progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="@ViewBag.Form.Questions.Count">
+                                            TEXT
+                                        </div>
                                     </div>
-                                </div>
-                                <ul class="pager">
-                                    <li class="previous pull-left p-l-20">
-                                        <button id="previousButton" onclick="navigateQuestion(this,'prev')" data-last="0"
-                                                type="button" class="btn bg-indigo waves-effect">
-                                            <i class="material-icons">keyboard_arrow_left</i>
-                                            <span>PREVIOUS</span>
-                                        </button>
-                                    </li>
-                                    <li class="next pull-right p-r-20">
-                                        <button id="nextButton" onclick="navigateQuestion(this,'next')" data-next="2"
-                                                type="button" class="btn bg-indigo waves-effect">
-                                            <span>NEXT</span>
-                                            <i class="material-icons">keyboard_arrow_right</i>
-                                        </button>
-                                    </li>
-                                    
+                                    <ul class="pager">
+                                        <li class="previous pull-left p-l-20">
+                                            <button id="previousButton" onclick="navigateQuestion(this,'prev')" data-last="0"
+                                                    type="button" class="btn bg-indigo waves-effect">
+                                                <i class="material-icons">keyboard_arrow_left</i>
+                                                <span>PREVIOUS</span>
+                                            </button>
+                                        </li>
+                                        <li class="next pull-right p-r-20">
+                                            <button id="nextButton" onclick="navigateQuestion(this,'next')" data-next="2"
+                                                    type="button" class="btn bg-indigo waves-effect">
+                                                <span>NEXT</span>
+                                                <i class="material-icons">keyboard_arrow_right</i>
+                                            </button>
+                                        </li>
+
                                         <li class="next pull-right p-r-20" id="submitButtonLi">
                                             <button id="submitButton" type="submit" class="btn bg-light-blue waves-effect" form="review_form">
                                                 <span>SUBMIT</span>
                                                 <i class="material-icons">send</i>
                                             </button>
                                         </li>
-                                    
-                                </ul>
-                            </nav>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            
                         </div>
                     </div>
                 </div>
                 @<!-- #END# Align Links -->
-                                    End Using
+                                                End Using
 
         </div>
 
@@ -234,6 +241,8 @@ End Code
             $(".question-row").each(function (i, obj) {
                 if ($(obj).data("index") !== 1) {
                     $(obj).hide();
+                    //$(obj).css("display", "none");
+                    
                 }
             });
 
@@ -255,22 +264,36 @@ End Code
             $("#review_form").submit();
         }
         function checkBoxClicked(element) {
-
+            var sibCheckBox = $(element).prev();
             var checkBoxes = $(".choice-checkbox");
             console.log(checkBoxes.length);
+            var sibCheckBoxes = $(element).parent().parent().find('input[type="checkbox"]')
+            console.log(sibCheckBoxes.length)
+            console.log($(sibCheckBox).data("questionId"))
             //immitating Radio Button Group
-            $(checkBoxes).each(function (i, obj) {
-                if ($(obj).data("questionId") === $(element).data("questionId")) {
-                    if (obj != element) {
-                        $(obj).prop("checked", false);
-                    } else {
-                        $(obj).prop("checked", true);
-                    }
-                }
+            //$(sibCheckBoxes).each(function (i, obj) {
+            //    if ($(obj).data("questionId") === $(sibCheckBox).data("questionId")) {
+            //        if ($(obj).data("choiceId") === $(sibCheckBox).data("choiceId")) {
+            //            //console.log("OBJ is != to  $($(element).prev())")
+            //            //$(obj).prop("checked", false);
+            //            console.log("OBJ is == to  $($(element).prev())")
+            //             $(obj).checked = true;
+            //        } else {
+            //            console.log("OBJ is != to  $($(element).prev())")
+            //            console.log($(obj).data("choiceId"))
+            //            console.log($(sibCheckBox).data("choiceId"))
+            //            $(obj).checked  = false;   
+            //        }
+            //    }
+            //});
+
+            $(sibCheckBoxes).on('change', function() {
+                $(sibCheckBoxes).not(this).prop('checked', false);
             });
+            
             $(".choice-field").each(function (i, obj) {
-                if ($(element).data("questionId") === $(obj).data("questionId")) {
-                    $(obj).val($(element).data("choiceId"))
+                if ($(sibCheckBox).data("questionId") === $(obj).data("questionId")) {
+                    $(obj).val($(element).prev().data("choiceId"))
                 }
             })
 
@@ -292,8 +315,10 @@ End Code
                         //I added 1 since 0 is the DISABLED index, so the first question should have index of 1
                         if ($(obj).data("index") === $(element).data("next")) {
                             $(obj).show();
+                            //$(obj).css("display", "block");
                         } else {
                             $(obj).hide();
+                            //$(obj).css("display", "none");
                         }
                     });
 
@@ -338,8 +363,10 @@ End Code
                     $(questionRows).each(function (i, obj) {
                         if ($(obj).data("index") === $(element).data("last")) {
                             $(obj).show();
+                            //$(obj).css("display", "block");
                         } else {
                             $(obj).hide();
+                            //$(obj).css("display", "none");
                         }
                     });
                     $(element).data("last", $(element).data("last") - 1)
@@ -372,6 +399,9 @@ End Code
                 var progress = (parseInt(valueNow) / parseInt(valueMax)) * 100;
             $("#reviewProgressBar").css("width", progress + "%")
             $("#reviewProgressBar").text("Question " + $("#reviewProgressBar").attr("aria-valuenow") + " out of " + $("#reviewProgressBar").attr("aria-valuemax"));  
+        } 
+        function closeThis(form) {
+            form.submit();
         }
     </script>
 </body>

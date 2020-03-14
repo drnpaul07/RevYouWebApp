@@ -339,32 +339,10 @@
                         </ul>
                     </li>
 
-                    <li class="header">SUB NAVIGATION</li>
-                    <li id="communityNav">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">public</i>
-                            <span>Community</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li id="communityNavPost">
-                                <a href="/Home/About">Posted Reviewers</a>
-                            </li>
-                            <li id="communityNavDisc">
-                                <a href="/Home/Contact">Discussions</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="chatBotNav">
-                        <a href="../pages/helper-classes.html">
-                            <i class="material-icons">chat</i>
-                            <span>Chat Bot</span>
-                        </a>
-                    </li>
-
                     @If User.IsInRole("USER") Then
                     @<li class="header" style="text-transform:uppercase">@User.Identity.GetUserName's Navigation</li>
                     @<li id="profileNav">
-                        <a href="javascript:void(0);">
+                        <a href="/User/Profile/@User.Identity.GetUserName">
                             <i class="material-icons">face</i>
                             <span>Profile</span>
                         </a>

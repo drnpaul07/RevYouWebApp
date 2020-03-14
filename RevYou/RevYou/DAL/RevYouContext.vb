@@ -16,7 +16,9 @@ Namespace DAL
         Public Property UserData As DbSet(Of UserData)
         Public Property Category As DbSet(Of Category)
         Public Property Tag As DbSet(Of Tag)
-
+        'LATEST
+        Public Property Result As DbSet(Of Result)
+        Public Property UserActivity As DbSet(Of UserActivity)
 
         'has Many-To-Many-Relationship
         Public Property UserTag As DbSet(Of UserTag)
@@ -37,6 +39,32 @@ Namespace DAL
                 .HasMany(Function(m) m.FormTags) _
                 .WithRequired(Function(m) m.Tag) _
                 .WillCascadeOnDelete(False)
+
+            'WITH LATEST AND WOULD NOT CASCADE DELETE MODELS
+            'USERDATA
+            modelBuilder.Entity(Of UserData)() _
+                .HasMany(Function(m) m.UserActivities) _
+                .WithRequired(Function(m) m.UserData) _
+                .WillCascadeOnDelete(False)
+
+            modelBuilder.Entity(Of UserData)() _
+                .HasMany(Function(m) m.Results) _
+                .WithRequired(Function(m) m.UserData) _
+                .WillCascadeOnDelete(False)
+            'FORM
+            'modelBuilder.Entity(Of Form)() _
+            '    .HasMany(Function(m) m.Results) _
+            '    .WithRequired(Function(m) m.Form) _
+            '    .WillCascadeOnDelete(False)
+            'modelBuilder.Entity(Of Form)() _
+            '    .HasMany(Function(m) m.UserActivities) _
+            '    .WithRequired(Function(m) m.Form) _
+            '    .WillCascadeOnDelete(False)
+            'FOR NULLABLE FK ON USER ACTIVITY
+            'modelBuilder.Entity(Of UserActivity)() _
+            '    .HasOptional(Function(m) m.Result) _
+            '    .WithOptionalDependent(Function(m) m.UserActivities)
+
         End Sub
 
     End Class
